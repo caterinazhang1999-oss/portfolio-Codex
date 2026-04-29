@@ -271,7 +271,7 @@ button {
 }
 
 .project-group--offset .project-card--large {
-  margin-top: clamp(24px, 4vw, 76px);
+  margin-top: 0;
 }
 
 @keyframes ring-spin {
