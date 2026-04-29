@@ -186,7 +186,7 @@ function Header() {
       </a>
       <svg
         aria-hidden="true"
-        className="nav-elastic-line pointer-events-none absolute bottom-[-1px] left-0 h-12 w-full overflow-visible"
+        className="nav-elastic-line pointer-events-none absolute left-0 top-full -mt-px h-12 w-full overflow-visible"
         preserveAspectRatio="none"
         viewBox="0 0 100 50"
       >
