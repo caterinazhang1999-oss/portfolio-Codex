@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 
 function previewSwatch(from: string, to: string, accent: string) {
   const svg = `
@@ -120,7 +120,7 @@ function Preloader() {
   return (
     <motion.div
       animate={{ opacity: 0, pointerEvents: "none" }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+      className="fixed inset-0 z-[1200] flex items-center justify-center bg-black"
       initial={{ opacity: 1 }}
       transition={{ delay: 1.1, duration: 0.7, ease: "easeInOut" }}
     >
@@ -152,7 +152,7 @@ function Preloader() {
 
 function Header() {
   return (
-    <header className="layout-grid absolute left-0 right-0 top-0 z-40 h-20 items-start pt-7 md:pt-8">
+    <header className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start bg-black/90 pt-7 backdrop-blur-md md:pt-8">
       <a
         aria-label="Xuan home"
         className="relative col-span-1 h-10 w-9 md:h-11 md:w-10"
@@ -178,6 +178,18 @@ function Header() {
       <a className="tight-link col-span-1 col-start-4 mt-[22px] justify-self-end md:col-start-12 md:mt-[25px]" href="#contact">
         Contacts
       </a>
+      <svg
+        aria-hidden="true"
+        className="nav-elastic-line pointer-events-none absolute bottom-0 left-0 h-4 w-full"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 12"
+      >
+        <path
+          className="nav-elastic-path"
+          d="M0 8 C 24 8 34 8 50 8 S 76 8 100 8"
+          pathLength="100"
+        />
+      </svg>
     </header>
   );
 }
@@ -335,9 +347,11 @@ function PersonalIntro() {
 }
 
 function ProjectPreviewImage({
-  project
+  project,
+  size = "large"
 }: {
   project: Project;
+  size?: "small" | "large";
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [previewIndex, setPreviewIndex] = useState(0);
@@ -365,7 +379,10 @@ function ProjectPreviewImage({
 
   return (
     <a
-      className="group relative block aspect-[1.18] overflow-hidden bg-[#151515]"
+      className={[
+        "project-image group relative block overflow-hidden bg-[#151515]",
+        size === "small" ? "aspect-[5/4]" : "aspect-[4/3]"
+      ].join(" ")}
       href="#contact"
       onBlur={stopPreview}
       onFocus={startPreview}
@@ -381,7 +398,11 @@ function ProjectPreviewImage({
             : "scale-100 blur-0 brightness-100"
         ].join(" ")}
         fill
-        sizes="(max-width: 768px) 100vw, 60vw"
+        sizes={
+          size === "small"
+            ? "(max-width: 768px) 100vw, 34vw"
+            : "(max-width: 768px) 100vw, 56vw"
+        }
         src={project.image}
       />
       <AnimatePresence>
@@ -397,7 +418,7 @@ function ProjectPreviewImage({
               <motion.img
                 alt=""
                 animate={{ opacity: 1, scale: 1 }}
-                className="aspect-square w-[42%] min-w-[220px] max-w-[480px] object-cover"
+                className="aspect-square w-[42%] min-w-[160px] max-w-[480px] object-cover md:min-w-[220px]"
                 exit={{ opacity: 0, scale: 0.97 }}
                 initial={{ opacity: 0, scale: 0.94 }}
                 key={project.hoverImages[previewIndex]}
@@ -412,51 +433,21 @@ function ProjectPreviewImage({
   );
 }
 
-function CarouselControls({
-  canNext,
-  canPrevious,
-  onNext,
-  onPrevious
+function ProjectCard({
+  className = "",
+  project,
+  size = "large"
 }: {
-  canNext: boolean;
-  canPrevious: boolean;
-  onNext: () => void;
-  onPrevious: () => void;
+  className?: string;
+  project: Project;
+  size?: "small" | "large";
 }) {
-  const buttonClass =
-    "inline-flex h-14 w-20 items-center justify-center rounded-full bg-[#171717] text-ash transition duration-200 hover:bg-[#262626] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:bg-[#171717] disabled:hover:text-ash md:h-16 md:w-24";
-
-  return (
-    <div className="flex gap-3">
-      <button
-        aria-label="Scroll projects left"
-        className={buttonClass}
-        disabled={!canPrevious}
-        onClick={onPrevious}
-        type="button"
-      >
-        <ArrowLeft className="h-5 w-5 stroke-[2.4]" />
-      </button>
-      <button
-        aria-label="Scroll projects right"
-        className={buttonClass}
-        disabled={!canNext}
-        onClick={onNext}
-        type="button"
-      >
-        <ArrowRight className="h-5 w-5 stroke-[2.4]" />
-      </button>
-    </div>
-  );
-}
-
-function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.article
       {...reveal}
-      className="w-[82vw] flex-none snap-start md:w-[min(56vw,880px)] lg:w-[min(52vw,920px)]"
+      className={["project-card", className].join(" ")}
     >
-      <ProjectPreviewImage project={project} />
+      <ProjectPreviewImage project={project} size={size} />
       <div className="mt-5">
         <h3 className="text-[clamp(23px,2.1vw,34px)] font-semibold leading-[0.98] tracking-[-0.06em] text-ash">
           {project.title}
@@ -475,90 +466,29 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectsCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canPrevious, setCanPrevious] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-
-  const updateScrollState = useCallback(() => {
-    const container = scrollRef.current;
-
-    if (!container) {
-      return;
-    }
-
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    setCanPrevious(container.scrollLeft > 6);
-    setCanNext(container.scrollLeft < maxScroll - 6);
-  }, []);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    updateScrollState();
-
-    if (!container) {
-      return;
-    }
-
-    container.addEventListener("scroll", updateScrollState, { passive: true });
-    window.addEventListener("resize", updateScrollState);
-
-    return () => {
-      container.removeEventListener("scroll", updateScrollState);
-      window.removeEventListener("resize", updateScrollState);
-    };
-  }, [updateScrollState]);
-
-  const scrollProjects = (direction: -1 | 1) => {
-    const container = scrollRef.current;
-
-    if (!container) {
-      return;
-    }
-
-    const distance = Math.max(container.clientWidth * 0.7, 320);
-    container.scrollBy({
-      behavior: "smooth",
-      left: direction * distance
-    });
-  };
+function ProjectsEditorial() {
+  const projectPairs = [
+    [projects[0], projects[1]],
+    [projects[2], projects[3]]
+  ];
 
   return (
-    <>
-      <motion.div
-        {...reveal}
-        className="layout-grid mt-10 items-end md:mt-14"
-      >
-        <div className="col-span-4 md:col-span-3">
-          <CarouselControls
-            canNext={canNext}
-            canPrevious={canPrevious}
-            onNext={() => scrollProjects(1)}
-            onPrevious={() => scrollProjects(-1)}
+    <div className="selected-projects mt-12 md:mt-20">
+      {projectPairs.map(([smallProject, largeProject]) => (
+        <div className="project-pair" key={smallProject.title}>
+          <ProjectCard
+            className="project-card--small"
+            project={smallProject}
+            size="small"
+          />
+          <ProjectCard
+            className="project-card--large"
+            project={largeProject}
+            size="large"
           />
         </div>
-        <div className="col-span-4 mt-8 md:col-span-5 md:col-start-8 md:mt-0">
-          <p className="text-[clamp(24px,2vw,38px)] font-semibold leading-[1.02] tracking-[-0.06em] text-ash">
-            Focused identities, interfaces, and visual systems shaped for clear
-            launch moments.
-          </p>
-          <p className="mt-5 max-w-[34rem] text-[15px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/62 md:text-[16px]">
-            Browse selected projects horizontally. Each work keeps its image
-            surface, motion preview, and concise production details intact.
-          </p>
-        </div>
-      </motion.div>
-
-      <div
-        aria-label="Selected projects carousel"
-        className="horizontal-scroll mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden px-[var(--page-x)] pb-2 md:mt-16 md:gap-10"
-        ref={scrollRef}
-      >
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
 
@@ -574,7 +504,7 @@ function Projects() {
       >
         <h2 className={sectionTitleClass}>Selected projects</h2>
       </motion.div>
-      <ProjectsCarousel />
+      <ProjectsEditorial />
     </section>
   );
 }

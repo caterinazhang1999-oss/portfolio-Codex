@@ -94,6 +94,37 @@ button {
   color: #fff;
 }
 
+.nav-shell {
+  box-shadow: 0 1px 0 rgba(197, 197, 197, 0.08);
+}
+
+.nav-elastic-path {
+  fill: none;
+  opacity: 0.62;
+  stroke: rgba(197, 197, 197, 0.22);
+  stroke-width: 0.7;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 260ms ease,
+    stroke 260ms ease,
+    transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  vector-effect: non-scaling-stroke;
+}
+
+.nav-shell:hover .nav-elastic-path {
+  opacity: 1;
+  stroke: rgba(255, 255, 255, 0.52);
+  transform: translateY(2px) scaleY(1.85);
+}
+
+#about,
+#projects,
+#capabilities,
+#contact {
+  scroll-margin-top: 96px;
+}
+
 .char-swap {
   display: inline-flex;
   overflow: hidden;
@@ -125,14 +156,37 @@ button {
   opacity: 0.26;
 }
 
-.horizontal-scroll {
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+.selected-projects {
+  display: grid;
+  overflow: hidden;
+  padding-left: var(--page-x);
+  padding-right: var(--page-x);
+  row-gap: clamp(84px, 11vw, 180px);
 }
 
-.horizontal-scroll::-webkit-scrollbar {
-  display: none;
+.project-pair {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(48px, 12vw, 240px);
+  width: 100%;
+}
+
+.project-card {
+  min-width: 0;
+}
+
+.project-card--small {
+  flex: 0 0 clamp(280px, 28vw, 520px);
+}
+
+.project-card--large {
+  flex: 0 0 clamp(520px, 48vw, 900px);
+  margin-left: auto;
+}
+
+.project-pair:nth-child(even) .project-card--large {
+  margin-top: clamp(24px, 4vw, 76px);
 }
 
 @keyframes ring-spin {
@@ -164,6 +218,38 @@ button {
 
   body {
     background-size: 100% 68px, 68px 100%;
+  }
+
+  .selected-projects {
+    row-gap: 64px;
+  }
+
+  .project-pair {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .project-card--small,
+  .project-card--large {
+    flex: none;
+    margin-left: 0;
+    margin-top: 0 !important;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .project-pair {
+    gap: clamp(32px, 6vw, 72px);
+  }
+
+  .project-card--small {
+    flex-basis: clamp(240px, 32vw, 340px);
+  }
+
+  .project-card--large {
+    flex-basis: clamp(390px, 52vw, 560px);
   }
 }
 
