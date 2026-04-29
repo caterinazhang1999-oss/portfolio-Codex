@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 
 function previewSwatch(from: string, to: string, accent: string) {
   const svg = `
@@ -151,8 +151,14 @@ function Preloader() {
 }
 
 function Header() {
+  const [navHovered, setNavHovered] = useState(false);
+
   return (
-    <header className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start bg-black/90 pt-7 backdrop-blur-md md:pt-8">
+    <header
+      className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start bg-black/90 pt-7 backdrop-blur-md md:pt-8"
+      onMouseEnter={() => setNavHovered(true)}
+      onMouseLeave={() => setNavHovered(false)}
+    >
       <a
         aria-label="Xuan home"
         className="relative col-span-1 h-10 w-9 md:h-11 md:w-10"
@@ -180,14 +186,26 @@ function Header() {
       </a>
       <svg
         aria-hidden="true"
-        className="nav-elastic-line pointer-events-none absolute bottom-0 left-0 h-4 w-full"
+        className="nav-elastic-line pointer-events-none absolute bottom-[-1px] left-0 h-12 w-full overflow-visible"
         preserveAspectRatio="none"
-        viewBox="0 0 100 12"
+        viewBox="0 0 100 50"
       >
-        <path
+        <motion.path
+          animate={{
+            d: navHovered ? "M 0 1 Q 50 38 100 1" : "M 0 1 Q 50 1 100 1"
+          }}
           className="nav-elastic-path"
-          d="M0 8 C 24 8 34 8 50 8 S 76 8 100 8"
-          pathLength="100"
+          fill="none"
+          initial={false}
+          stroke="rgba(255,255,255,0.22)"
+          strokeWidth="1"
+          transition={{
+            damping: 13,
+            mass: 0.7,
+            stiffness: 180,
+            type: "spring"
+          }}
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     </header>
@@ -467,27 +485,127 @@ function ProjectCard({
 }
 
 function ProjectsEditorial() {
-  const projectPairs = [
-    [projects[0], projects[1]],
-    [projects[2], projects[3]]
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [canPrevious, setCanPrevious] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+  const projectGroups = [
+    {
+      id: "launch-systems",
+      largeProject: projects[1],
+      smallProject: projects[0]
+    },
+    {
+      id: "brand-spaces",
+      largeProject: projects[3],
+      smallProject: projects[2]
+    }
   ];
+
+  const updateScrollState = useCallback(() => {
+    const track = trackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    setCanPrevious(track.scrollLeft > 8);
+    setCanNext(track.scrollLeft < maxScroll - 8);
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    updateScrollState();
+
+    if (!track) {
+      return;
+    }
+
+    track.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+
+    return () => {
+      track.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [updateScrollState]);
+
+  const scrollProjects = (direction: "next" | "previous") => {
+    const track = trackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    track.scrollBy({
+      behavior: "smooth",
+      left: direction === "next" ? track.clientWidth : -track.clientWidth
+    });
+  };
 
   return (
     <div className="selected-projects mt-12 md:mt-20">
-      {projectPairs.map(([smallProject, largeProject]) => (
-        <div className="project-pair" key={smallProject.title}>
-          <ProjectCard
-            className="project-card--small"
-            project={smallProject}
-            size="small"
-          />
-          <ProjectCard
-            className="project-card--large"
-            project={largeProject}
-            size="large"
-          />
+      <motion.div
+        {...reveal}
+        className="projects-header mb-12 md:mb-16"
+      >
+        <div className="carousel-controls">
+          <button
+            aria-label="Previous project group"
+            className="carousel-button"
+            disabled={!canPrevious}
+            onClick={() => scrollProjects("previous")}
+            type="button"
+          >
+            <ArrowLeft className="h-5 w-5 stroke-[2.4]" />
+          </button>
+          <button
+            aria-label="Next project group"
+            className="carousel-button"
+            disabled={!canNext}
+            onClick={() => scrollProjects("next")}
+            type="button"
+          >
+            <ArrowRight className="h-5 w-5 stroke-[2.4]" />
+          </button>
         </div>
-      ))}
+
+        <div className="projects-intro">
+          <h3>
+            Selected work shaped through identity, interface, and visual
+            systems.
+          </h3>
+          <p>
+            Project groups move as complete editorial spreads, preserving the
+            contrast between focused studies and larger visual anchors.
+          </p>
+        </div>
+      </motion.div>
+
+      <div className="projects-carousel" aria-label="Selected projects carousel">
+        <div className="projects-track" ref={trackRef}>
+          {projectGroups.map((group, index) => (
+            <div
+              className={[
+                "project-group",
+                index % 2 === 1 ? "project-group--offset" : ""
+              ].join(" ")}
+              key={group.id}
+            >
+              <ProjectCard
+                className="project-card--small"
+                project={group.smallProject}
+                size="small"
+              />
+              <ProjectCard
+                className="project-card--large"
+                project={group.largeProject}
+                size="large"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
