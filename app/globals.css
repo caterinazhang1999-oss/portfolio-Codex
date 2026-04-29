@@ -94,6 +94,11 @@ button {
   color: #fff;
 }
 
+.footer-back-link {
+  position: absolute;
+  text-transform: none;
+}
+
 .nav-shell {
   overflow: visible;
 }

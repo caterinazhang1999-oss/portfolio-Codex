@@ -672,8 +672,6 @@ function Footer() {
           className="inline-block text-[clamp(58px,6.7vw,118px)] font-semibold leading-[1.05] tracking-[-0.07em] text-ash underline decoration-[0.045em] underline-offset-[0.13em] transition-opacity hover:opacity-70"
           href="mailto:hello@atena.studio"
         >
-          Collaborate
-          <br />
           Let&apos;s talk
         </a>
       </motion.div>
@@ -693,9 +691,6 @@ function Footer() {
           <a className="transition-opacity hover:opacity-70" href="#about">
             About
           </a>
-          <a className="transition-opacity hover:opacity-70" href="#capabilities">
-            Services
-          </a>
         </div>
       </motion.nav>
 
@@ -707,21 +702,29 @@ function Footer() {
           ( Find Me )
         </p>
         <div className="grid gap-3 text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash/86">
-          <a className="transition-opacity hover:opacity-70" href="https://x.com" rel="noreferrer" target="_blank">
-            X
+          <a className="transition-opacity hover:opacity-70" href="https://behance.net" rel="noreferrer" target="_blank">
+            Behance
           </a>
-          <a className="transition-opacity hover:opacity-70" href="https://framer.com" rel="noreferrer" target="_blank">
-            Framer
+          <a className="transition-opacity hover:opacity-70" href="https://linkedin.com" rel="noreferrer" target="_blank">
+            Linkedin
           </a>
-          <a className="transition-opacity hover:opacity-70" href="https://contra.com" rel="noreferrer" target="_blank">
-            Contra
+          <a className="transition-opacity hover:opacity-70" href="https://instagram.com" rel="noreferrer" target="_blank">
+            Ins
           </a>
         </div>
       </motion.div>
 
+      <motion.a
+        {...reveal}
+        className="tight-link footer-back-link absolute bottom-10 left-[var(--page-x)]"
+        href="#"
+      >
+        Back to top <span aria-hidden="true">↑</span>
+      </motion.a>
+
       <motion.div
         {...reveal}
-        className="pointer-events-none absolute bottom-[-28px] right-[var(--page-x)] h-[clamp(180px,24vw,360px)] w-[min(74vw,900px)] opacity-95 md:bottom-[-52px]"
+        className="pointer-events-none absolute bottom-10 right-[var(--page-x)] h-[clamp(160px,20vw,300px)] w-[min(70vw,820px)] opacity-95 md:bottom-12"
       >
         <Image
           alt="Zhang Xuan footer wordmark"
