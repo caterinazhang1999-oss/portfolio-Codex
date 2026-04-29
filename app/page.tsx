@@ -87,10 +87,9 @@ type Project = (typeof projects)[number];
 
 const capabilities = [
   "Brand Identity",
-  "UI/UX Design",
-  "Art Direction",
-  "Editorial Systems",
-  "Web Design"
+  "Digital Design",
+  "Game Design",
+  "Vibe coding"
 ];
 
 const reveal = {
@@ -544,7 +543,7 @@ function ProjectsEditorial() {
   };
 
   return (
-    <div className="selected-projects mt-12 md:mt-20">
+    <div className="selected-projects mt-14 border-t border-ash/20 pt-10 md:mt-20 md:pt-16">
       <motion.div
         {...reveal}
         className="projects-header mb-12 md:mb-16"
