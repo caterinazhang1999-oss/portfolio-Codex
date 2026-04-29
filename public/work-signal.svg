@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">Signal Room project cover</title>
+  <desc id="desc">Motion campaign visual system.</desc>
+  <rect width="1200" height="740" fill="#111014"/>
+  <rect x="70" y="68" width="1060" height="604" fill="#07070a" stroke="#383642"/>
+  <circle cx="600" cy="370" r="238" fill="none" stroke="#5b6cff" stroke-opacity=".52" stroke-width="2"/>
+  <circle cx="600" cy="370" r="152" fill="none" stroke="#c5c5c5" stroke-opacity=".28" stroke-width="2" stroke-dasharray="18 16"/>
+  <rect x="244" y="244" width="224" height="252" fill="#5b6cff" opacity=".72"/>
+  <rect x="732" y="244" width="224" height="252" fill="#c5c5c5" opacity=".1"/>
+  <text x="244" y="554" fill="#c5c5c5" opacity=".56" font-family="Arial, sans-serif" font-size="28" font-weight="700">SIGNAL ROOM</text>
+</svg>

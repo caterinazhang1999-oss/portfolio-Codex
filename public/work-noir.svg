@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">Noir Supply project cover</title>
+  <desc id="desc">Premium monochrome packaging system.</desc>
+  <rect width="1200" height="740" fill="#101010"/>
+  <rect x="80" y="70" width="1040" height="600" fill="#050505" stroke="#303030"/>
+  <rect x="170" y="132" width="260" height="440" fill="#c5c5c5" opacity=".1"/>
+  <rect x="470" y="132" width="260" height="440" fill="#c5c5c5" opacity=".2"/>
+  <rect x="770" y="132" width="260" height="440" fill="#c5c5c5" opacity=".08"/>
+  <text x="170" y="622" fill="#c5c5c5" opacity=".55" font-family="Arial, sans-serif" font-size="32" font-weight="700">NOIR SUPPLY</text>
+  <path d="M170 252h860M170 452h860" stroke="#c5c5c5" stroke-opacity=".16"/>
+</svg>

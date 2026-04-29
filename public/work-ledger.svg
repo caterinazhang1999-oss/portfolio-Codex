@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">Ledger North project cover</title>
+  <desc id="desc">Dark product dashboard design.</desc>
+  <rect width="1200" height="740" fill="#0d1110"/>
+  <rect x="88" y="72" width="1024" height="596" fill="#050707" stroke="#2b3731"/>
+  <rect x="138" y="128" width="232" height="484" fill="#16211c"/>
+  <rect x="410" y="128" width="648" height="156" fill="#c5c5c5" opacity=".1"/>
+  <rect x="410" y="324" width="300" height="288" fill="#355c46" opacity=".75"/>
+  <rect x="752" y="324" width="306" height="288" fill="#c5c5c5" opacity=".12"/>
+  <path d="M448 512c72-118 118-122 190-30 64 82 114 78 188-92" fill="none" stroke="#c5c5c5" stroke-opacity=".64" stroke-width="5"/>
+  <text x="138" y="585" fill="#c5c5c5" opacity=".5" font-family="Arial, sans-serif" font-size="26" font-weight="700">LEDGER NORTH</text>
+</svg>

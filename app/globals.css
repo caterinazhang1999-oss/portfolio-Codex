@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page-x: clamp(12px, 1.45vw, 22px);
+  --grid-gap: clamp(12px, 1.25vw, 20px);
+  --ash: #c5c5c5;
+  --muted: rgba(197, 197, 197, 0.42);
+  --line: rgba(197, 197, 197, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  letter-spacing: 0;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    #000;
+  background-size: 100% 86px, 86px 100%;
+}
+
+::selection {
+  background: var(--ash);
+  color: #000;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-left: var(--page-x);
+  padding-right: var(--page-x);
+}
+
+.micro-label {
+  color: var(--muted);
+  font-size: clamp(10px, 0.72vw, 14px);
+  font-weight: 800;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.display-title {
+  color: #fff;
+  font-size: clamp(42px, 6.2vw, 112px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.tight-link {
+  position: relative;
+  color: var(--ash);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: color 240ms ease;
+}
+
+.tight-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -4px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform-origin: left;
+  transition: transform 240ms ease;
+}
+
+.tight-link:hover::after {
+  transform: scaleX(0.18);
+}
+
+.tight-link:hover {
+  color: #fff;
+}
+
+.char-swap {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.char-swap span {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.char-swap:hover span {
+  transform: translateY(-105%);
+}
+
+.image-noise::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  mix-blend-mode: screen;
+  content: "";
+  opacity: 0.26;
+}
+
+@keyframes ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reverse-spin {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes slow-float {
+  0%,
+  100% {
+    transform: translate3d(-50%, 0, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate3d(-50%, -18px, 0) rotate(2deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .layout-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  body {
+    background-size: 100% 68px, 68px 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract black portfolio feature image</title>
+  <desc id="desc">A dark editorial composition with refined grids and muted color fragments.</desc>
+  <rect width="1600" height="900" fill="#111"/>
+  <rect x="92" y="82" width="1416" height="736" fill="#080808" stroke="#2f2f2f"/>
+  <path d="M0 610h1600v290H0z" fill="#171717"/>
+  <g opacity=".55" stroke="#c5c5c5" stroke-width="1">
+    <path d="M210 82v736M390 82v736M570 82v736M750 82v736M930 82v736M1110 82v736M1290 82v736"/>
+    <path d="M92 210h1416M92 338h1416M92 466h1416M92 594h1416M92 722h1416"/>
+  </g>
+  <rect x="210" y="180" width="360" height="518" fill="#d8d2c2" opacity=".08"/>
+  <rect x="650" y="126" width="520" height="642" fill="#050505" stroke="#c5c5c5" stroke-opacity=".28"/>
+  <rect x="706" y="188" width="408" height="84" fill="#c5c5c5" opacity=".16"/>
+  <rect x="706" y="318" width="232" height="310" fill="#c21f2f" opacity=".72"/>
+  <rect x="968" y="318" width="146" height="310" fill="#c5c5c5" opacity=".12"/>
+  <circle cx="1232" cy="450" r="144" fill="none" stroke="#c5c5c5" stroke-opacity=".28" stroke-width="2"/>
+  <circle cx="1232" cy="450" r="82" fill="none" stroke="#c5c5c5" stroke-opacity=".42" stroke-width="2" stroke-dasharray="12 14"/>
+  <text x="210" y="772" fill="#c5c5c5" opacity=".42" font-family="Arial, sans-serif" font-size="24" font-weight="700">VISUAL SYSTEM / PERSONAL WORK</text>
+</svg>

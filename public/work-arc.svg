@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">Arc Atelier project cover</title>
+  <desc id="desc">Architectural portfolio system.</desc>
+  <rect width="1200" height="740" fill="#111"/>
+  <rect x="86" y="70" width="1028" height="600" fill="#080808" stroke="#35302a"/>
+  <path d="M200 590V222l202-92 202 92v368" fill="#6d5544" opacity=".72"/>
+  <path d="M604 590V260l178-78 178 78v330" fill="#c5c5c5" opacity=".12"/>
+  <path d="M200 590h760M200 222l202 92 202-92M604 260l178 78 178-78" fill="none" stroke="#c5c5c5" stroke-opacity=".28" stroke-width="2"/>
+  <text x="200" y="632" fill="#c5c5c5" opacity=".52" font-family="Arial, sans-serif" font-size="28" font-weight="700">ARC ATELIER</text>
+</svg>
