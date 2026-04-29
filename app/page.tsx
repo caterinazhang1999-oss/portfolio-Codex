@@ -251,7 +251,7 @@ function Hero() {
         <h1>
           <span className="md:pl-[14%]">Hi,I&apos;am</span>
           <br />
-          <span className="md:pl-[14%]">Xuan</span>
+          <span className="md:pl-[14%]">Xuan ZHang</span>
         </h1>
       </motion.div>
       <motion.div
@@ -714,17 +714,16 @@ function Footer() {
         </div>
       </motion.div>
 
-      <motion.a
-        {...reveal}
-        className="tight-link footer-back-link absolute bottom-10 left-[var(--page-x)]"
+      <a
+        className="tight-link footer-back-link absolute bottom-10 left-[var(--page-x)] z-20"
         href="#"
       >
         Back to top <span aria-hidden="true">↑</span>
-      </motion.a>
+      </a>
 
       <motion.div
         {...reveal}
-        className="pointer-events-none absolute bottom-10 right-[var(--page-x)] h-[clamp(160px,20vw,300px)] w-[min(70vw,820px)] opacity-95 md:bottom-12"
+        className="pointer-events-none absolute bottom-0 right-[var(--page-x)] h-[clamp(160px,20vw,300px)] w-[min(70vw,820px)] opacity-95"
       >
         <Image
           alt="Zhang Xuan footer wordmark"
