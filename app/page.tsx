@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 
 function previewSwatch(from: string, to: string, accent: string) {
   const svg = `
@@ -82,6 +82,8 @@ const projects = [
       "A digital gallery for an architectural practice, balancing calm project photography with precise navigation."
   }
 ];
+
+type Project = (typeof projects)[number];
 
 const capabilities = [
   "Brand Identity",
@@ -335,7 +337,7 @@ function PersonalIntro() {
 function ProjectPreviewImage({
   project
 }: {
-  project: (typeof projects)[number];
+  project: Project;
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [previewIndex, setPreviewIndex] = useState(0);
@@ -410,6 +412,156 @@ function ProjectPreviewImage({
   );
 }
 
+function CarouselControls({
+  canNext,
+  canPrevious,
+  onNext,
+  onPrevious
+}: {
+  canNext: boolean;
+  canPrevious: boolean;
+  onNext: () => void;
+  onPrevious: () => void;
+}) {
+  const buttonClass =
+    "inline-flex h-14 w-20 items-center justify-center rounded-full bg-[#171717] text-ash transition duration-200 hover:bg-[#262626] hover:text-white disabled:cursor-default disabled:opacity-35 disabled:hover:bg-[#171717] disabled:hover:text-ash md:h-16 md:w-24";
+
+  return (
+    <div className="flex gap-3">
+      <button
+        aria-label="Scroll projects left"
+        className={buttonClass}
+        disabled={!canPrevious}
+        onClick={onPrevious}
+        type="button"
+      >
+        <ArrowLeft className="h-5 w-5 stroke-[2.4]" />
+      </button>
+      <button
+        aria-label="Scroll projects right"
+        className={buttonClass}
+        disabled={!canNext}
+        onClick={onNext}
+        type="button"
+      >
+        <ArrowRight className="h-5 w-5 stroke-[2.4]" />
+      </button>
+    </div>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <motion.article
+      {...reveal}
+      className="w-[82vw] flex-none snap-start md:w-[min(56vw,880px)] lg:w-[min(52vw,920px)]"
+    >
+      <ProjectPreviewImage project={project} />
+      <div className="mt-5">
+        <h3 className="text-[clamp(23px,2.1vw,34px)] font-semibold leading-[0.98] tracking-[-0.06em] text-ash">
+          {project.title}
+        </h3>
+        <p className="mt-3 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
+          {project.year} / {project.type}
+        </p>
+        <p className="mt-6 max-w-[34rem] text-[15px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/70 md:text-[16px]">
+          {project.description}
+        </p>
+        <p className="mt-4 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
+          {project.role}
+        </p>
+      </div>
+    </motion.article>
+  );
+}
+
+function ProjectsCarousel() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canPrevious, setCanPrevious] = useState(false);
+  const [canNext, setCanNext] = useState(true);
+
+  const updateScrollState = useCallback(() => {
+    const container = scrollRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    setCanPrevious(container.scrollLeft > 6);
+    setCanNext(container.scrollLeft < maxScroll - 6);
+  }, []);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    updateScrollState();
+
+    if (!container) {
+      return;
+    }
+
+    container.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+
+    return () => {
+      container.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [updateScrollState]);
+
+  const scrollProjects = (direction: -1 | 1) => {
+    const container = scrollRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const distance = Math.max(container.clientWidth * 0.7, 320);
+    container.scrollBy({
+      behavior: "smooth",
+      left: direction * distance
+    });
+  };
+
+  return (
+    <>
+      <motion.div
+        {...reveal}
+        className="layout-grid mt-10 items-end md:mt-14"
+      >
+        <div className="col-span-4 md:col-span-3">
+          <CarouselControls
+            canNext={canNext}
+            canPrevious={canPrevious}
+            onNext={() => scrollProjects(1)}
+            onPrevious={() => scrollProjects(-1)}
+          />
+        </div>
+        <div className="col-span-4 mt-8 md:col-span-5 md:col-start-8 md:mt-0">
+          <p className="text-[clamp(24px,2vw,38px)] font-semibold leading-[1.02] tracking-[-0.06em] text-ash">
+            Focused identities, interfaces, and visual systems shaped for clear
+            launch moments.
+          </p>
+          <p className="mt-5 max-w-[34rem] text-[15px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/62 md:text-[16px]">
+            Browse selected projects horizontally. Each work keeps its image
+            surface, motion preview, and concise production details intact.
+          </p>
+        </div>
+      </motion.div>
+
+      <div
+        aria-label="Selected projects carousel"
+        className="horizontal-scroll mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden px-[var(--page-x)] pb-2 md:mt-16 md:gap-10"
+        ref={scrollRef}
+      >
+        {projects.map((project) => (
+          <ProjectCard key={project.title} project={project} />
+        ))}
+      </div>
+    </>
+  );
+}
+
 function Projects() {
   return (
     <section className="pt-24 md:pt-36">
@@ -422,40 +574,7 @@ function Projects() {
       >
         <h2 className={sectionTitleClass}>Selected projects</h2>
       </motion.div>
-      <div className="layout-grid mt-12 gap-y-20 md:mt-20 md:gap-y-28">
-        {projects.map((project, index) => (
-          <motion.article
-            key={project.title}
-            {...reveal}
-            className={[
-              "col-span-4",
-              index % 4 === 0
-                ? "md:col-span-4"
-                : index % 4 === 1
-                  ? "md:col-span-6 md:col-start-7"
-                  : index % 4 === 2
-                    ? "md:col-span-6"
-                    : "md:col-span-5 md:col-start-8"
-            ].join(" ")}
-          >
-            <ProjectPreviewImage project={project} />
-            <div className="mt-5">
-              <h3 className="text-[clamp(23px,2.1vw,34px)] font-semibold leading-[0.98] tracking-[-0.06em] text-ash">
-                {project.title}
-              </h3>
-              <p className="mt-3 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
-                {project.year} / {project.type}
-              </p>
-              <p className="mt-6 max-w-[34rem] text-[15px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/70 md:text-[16px]">
-                {project.description}
-              </p>
-              <p className="mt-4 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
-                {project.role}
-              </p>
-            </div>
-          </motion.article>
-        ))}
-      </div>
+      <ProjectsCarousel />
     </section>
   );
 }

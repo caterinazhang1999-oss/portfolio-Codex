@@ -125,6 +125,16 @@ button {
   opacity: 0.26;
 }
 
+.horizontal-scroll {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes ring-spin {
   to {
     transform: rotate(360deg);
