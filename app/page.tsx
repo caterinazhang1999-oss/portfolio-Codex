@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent
+} from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Play } from "lucide-react";
@@ -84,6 +90,13 @@ const projects = [
 ];
 
 type Project = (typeof projects)[number];
+
+type CursorLabelState = {
+  visible: boolean;
+  x: number;
+  y: number;
+  text: string;
+};
 
 const capabilities = [
   "Brand Identity",
@@ -452,10 +465,16 @@ function ProjectPreviewImage({
 
 function ProjectCard({
   className = "",
+  onCursorEnter,
+  onCursorLeave,
+  onCursorMove,
   project,
   size = "large"
 }: {
   className?: string;
+  onCursorEnter?: () => void;
+  onCursorLeave?: () => void;
+  onCursorMove?: (event: MouseEvent<HTMLElement>) => void;
   project: Project;
   size?: "small" | "large";
 }) {
@@ -463,6 +482,9 @@ function ProjectCard({
     <motion.article
       {...reveal}
       className={["project-card", className].join(" ")}
+      onMouseEnter={onCursorEnter}
+      onMouseLeave={onCursorLeave}
+      onMouseMove={onCursorMove}
     >
       <ProjectPreviewImage project={project} size={size} />
       <div className="mt-5">
@@ -483,10 +505,53 @@ function ProjectCard({
   );
 }
 
+function FloatingCursorLabel({
+  text,
+  visible,
+  x,
+  y
+}: CursorLabelState) {
+  const repeatedText = `${text} ·`;
+
+  return (
+    <motion.div
+      animate={{
+        opacity: visible ? 1 : 0,
+        scale: visible ? 1 : 0.86,
+        x: x + 18,
+        y: y + 18
+      }}
+      aria-hidden="true"
+      className="cursor-label"
+      initial={false}
+      transition={{
+        opacity: { duration: 0.18 },
+        scale: { duration: 0.18 },
+        x: { damping: 32, stiffness: 420, type: "spring" },
+        y: { damping: 32, stiffness: 420, type: "spring" }
+      }}
+    >
+      <div className="cursor-label__track">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <span className="cursor-label__text" key={index}>
+            {repeatedText}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 function ProjectsEditorial() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canPrevious, setCanPrevious] = useState(false);
   const [canNext, setCanNext] = useState(true);
+  const [cursorLabel, setCursorLabel] = useState<CursorLabelState>({
+    text: "VIEW PROJECT",
+    visible: false,
+    x: 0,
+    y: 0
+  });
   const projectGroups = [
     {
       id: "launch-systems",
@@ -542,6 +607,29 @@ function ProjectsEditorial() {
     });
   };
 
+  const showProjectCursor = (project: Project) => {
+    setCursorLabel((current) => ({
+      ...current,
+      text: `${project.title} · VIEW PROJECT`,
+      visible: true
+    }));
+  };
+
+  const moveProjectCursor = (event: MouseEvent<HTMLElement>) => {
+    setCursorLabel((current) => ({
+      ...current,
+      x: event.clientX,
+      y: event.clientY
+    }));
+  };
+
+  const hideProjectCursor = () => {
+    setCursorLabel((current) => ({
+      ...current,
+      visible: false
+    }));
+  };
+
   return (
     <div className="selected-projects mt-14 border-t border-ash/20 pt-10 md:mt-20 md:pt-16">
       <motion.div
@@ -593,11 +681,17 @@ function ProjectsEditorial() {
             >
               <ProjectCard
                 className="project-card--small"
+                onCursorEnter={() => showProjectCursor(group.smallProject)}
+                onCursorLeave={hideProjectCursor}
+                onCursorMove={moveProjectCursor}
                 project={group.smallProject}
                 size="small"
               />
               <ProjectCard
                 className="project-card--large"
+                onCursorEnter={() => showProjectCursor(group.largeProject)}
+                onCursorLeave={hideProjectCursor}
+                onCursorMove={moveProjectCursor}
                 project={group.largeProject}
                 size="large"
               />
@@ -605,6 +699,7 @@ function ProjectsEditorial() {
           ))}
         </div>
       </div>
+      <FloatingCursorLabel {...cursorLabel} />
     </div>
   );
 }
