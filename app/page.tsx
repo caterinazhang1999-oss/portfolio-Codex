@@ -8,109 +8,16 @@ import {
   type MouseEvent
 } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 
-function previewSwatch(from: string, to: string, accent: string) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
-      <defs>
-        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="${from}"/>
-          <stop offset="1" stop-color="${to}"/>
-        </linearGradient>
-      </defs>
-      <rect width="800" height="800" fill="url(#g)"/>
-      <rect x="84" y="84" width="632" height="632" fill="none" stroke="${accent}" stroke-opacity=".28" stroke-width="2"/>
-      <circle cx="400" cy="400" r="168" fill="${accent}" fill-opacity=".18"/>
-      <path d="M188 544h424M188 256h424" stroke="${accent}" stroke-opacity=".34" stroke-width="18"/>
-    </svg>
-  `;
-
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-}
-
-const projects = [
-  {
-    title: "Noir Supply",
-    year: "2026",
-    role: "Identity / Packaging",
-    type: "Brand System",
-    image: "/project-01.png",
-    hoverImages: [
-      previewSwatch("#f05f57", "#3943b7", "#fff7e8"),
-      previewSwatch("#19a974", "#f7c948", "#0a0a0a"),
-      previewSwatch("#f8b6d2", "#62c6ff", "#ffffff")
-    ],
-    description:
-      "A restrained visual identity for a premium materials studio, built around severe typography and tactile monochrome surfaces."
-  },
-  {
-    title: "Ledger North",
-    year: "2025",
-    role: "UI / Art Direction",
-    type: "Digital Product",
-    image: "/project-02.png",
-    hoverImages: [
-      previewSwatch("#6c63ff", "#101820", "#ffffff"),
-      previewSwatch("#ffb000", "#073b4c", "#f7f4ef"),
-      previewSwatch("#2ec4b6", "#ff3366", "#050505")
-    ],
-    description:
-      "A finance dashboard concept with editorial hierarchy, quiet data density, and a cinematic product reveal."
-  },
-  {
-    title: "Signal Room",
-    year: "2025",
-    role: "Campaign / Motion",
-    type: "Launch Design",
-    image: "/project-03.png",
-    hoverImages: [
-      previewSwatch("#d7263d", "#1b998b", "#f5f1e8"),
-      previewSwatch("#ff9f1c", "#2d3047", "#ffffff"),
-      previewSwatch("#9b5de5", "#00bbf9", "#fefefe")
-    ],
-    description:
-      "A launch language for an audio platform using modular frames, compressed type, and controlled luminous accents."
-  },
-  {
-    title: "Arc Atelier",
-    year: "2024",
-    role: "Brand / Web",
-    type: "Portfolio System",
-    image: "/project-04.png",
-    hoverImages: [
-      previewSwatch("#4d908e", "#111111", "#f2f2f2"),
-      previewSwatch("#f94144", "#f9c74f", "#151515"),
-      previewSwatch("#577590", "#90be6d", "#ffffff")
-    ],
-    description:
-      "A digital gallery for an architectural practice, balancing calm project photography with precise navigation."
-  }
-];
-
-type Project = (typeof projects)[number];
-
-type CursorLabelState = {
-  visible: boolean;
-  x: number;
-  y: number;
-  text: string;
-};
-
-const capabilities = [
-  "Brand Identity",
-  "Digital Design",
-  "Game Design",
-  "Vibe coding"
-];
-
-const reveal = {
-  initial: { opacity: 0, y: 34 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-} as const;
+import {
+  FloatingCursorLabel,
+  type CursorLabelState
+} from "../components/floating-cursor-label";
+import { Footer, Header, reveal } from "../components/site-chrome";
+import { capabilities, projects, type Project } from "../data/projects";
 
 function SplitHover({ children }: { children: string }) {
   return (
@@ -159,68 +66,6 @@ function Preloader() {
         </motion.div>
       </div>
     </motion.div>
-  );
-}
-
-function Header() {
-  const [navHovered, setNavHovered] = useState(false);
-
-  return (
-    <header
-      className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start bg-black/90 pt-7 backdrop-blur-md md:pt-8"
-      onMouseEnter={() => setNavHovered(true)}
-      onMouseLeave={() => setNavHovered(false)}
-    >
-      <a
-        aria-label="Xuan home"
-        className="relative col-span-1 h-10 w-9 md:h-11 md:w-10"
-        href="#"
-      >
-        <Image
-          alt="Xuan personal logo"
-          className="object-contain object-left-bottom"
-          fill
-          priority
-          sizes="40px"
-          src="/xuan-symbol-crop.png"
-        />
-      </a>
-      <nav className="col-span-2 col-start-2 mt-[22px] flex justify-center gap-7 md:col-span-2 md:col-start-6 md:mt-[25px] md:gap-10">
-        <a className="tight-link" href="#projects">
-          Work
-        </a>
-        <a className="tight-link" href="#about">
-          About
-        </a>
-      </nav>
-      <a className="tight-link col-span-1 col-start-4 mt-[22px] justify-self-end md:col-start-12 md:mt-[25px]" href="#contact">
-        Contacts
-      </a>
-      <svg
-        aria-hidden="true"
-        className="nav-elastic-line pointer-events-none absolute left-0 top-full -mt-px h-12 w-full overflow-visible"
-        preserveAspectRatio="none"
-        viewBox="0 0 100 50"
-      >
-        <motion.path
-          animate={{
-            d: navHovered ? "M 0 1 Q 50 38 100 1" : "M 0 1 Q 50 1 100 1"
-          }}
-          className="nav-elastic-path"
-          fill="none"
-          initial={false}
-          stroke="rgba(255,255,255,0.22)"
-          strokeWidth="1"
-          transition={{
-            damping: 13,
-            mass: 0.7,
-            stiffness: 180,
-            type: "spring"
-          }}
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-    </header>
   );
 }
 
@@ -413,7 +258,7 @@ function ProjectPreviewImage({
         "project-image group relative block overflow-hidden bg-[#151515]",
         size === "small" ? "aspect-[5/4]" : "aspect-[4/3]"
       ].join(" ")}
-      href="#contact"
+      href={project.href}
       onBlur={stopPreview}
       onFocus={startPreview}
       onMouseEnter={startPreview}
@@ -502,43 +347,6 @@ function ProjectCard({
         </p>
       </div>
     </motion.article>
-  );
-}
-
-function FloatingCursorLabel({
-  text,
-  visible,
-  x,
-  y
-}: CursorLabelState) {
-  const repeatedText = `${text} ·`;
-
-  return (
-    <motion.div
-      animate={{
-        opacity: visible ? 1 : 0,
-        scale: visible ? 1 : 0.86,
-        x: x + 18,
-        y: y + 18
-      }}
-      aria-hidden="true"
-      className="cursor-label"
-      initial={false}
-      transition={{
-        opacity: { duration: 0.18 },
-        scale: { duration: 0.18 },
-        x: { damping: 32, stiffness: 420, type: "spring" },
-        y: { damping: 32, stiffness: 420, type: "spring" }
-      }}
-    >
-      <div className="cursor-label__track">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <span className="cursor-label__text" key={index}>
-            {repeatedText}
-          </span>
-        ))}
-      </div>
-    </motion.div>
   );
 }
 
@@ -726,12 +534,12 @@ function Capabilities() {
     <section className="relative py-24 md:py-40" id="capabilities">
       <motion.div {...reveal} className="layout-grid items-start">
         <h2 className={sectionTitleClass}>Capabilities</h2>
-        <a
+        <Link
           className="tight-link col-span-2 col-start-3 mt-3 justify-self-end md:col-span-2 md:col-start-11 md:mt-4"
-          href="#projects"
+          href="/work"
         >
           All works
-        </a>
+        </Link>
       </motion.div>
       <motion.div
         {...reveal}
@@ -750,85 +558,6 @@ function Capabilities() {
         ))}
       </motion.div>
     </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer
-      className="layout-grid relative min-h-[760px] overflow-hidden border-t border-ash/25 pb-10 pt-16 md:min-h-[820px] md:pt-20"
-      id="contact"
-    >
-      <motion.div
-        {...reveal}
-        className="col-span-4 md:col-span-4"
-      >
-        <a
-          className="inline-block text-[clamp(58px,6.7vw,118px)] font-semibold leading-[1.05] tracking-[-0.07em] text-ash underline decoration-[0.045em] underline-offset-[0.13em] transition-opacity hover:opacity-70"
-          href="mailto:hello@atena.studio"
-        >
-          Let&apos;s talk
-        </a>
-      </motion.div>
-
-      <motion.nav
-        {...reveal}
-        aria-label="Footer navigation"
-        className="col-span-2 mt-12 md:col-span-2 md:col-start-7 md:mt-0"
-      >
-        <p className="mb-8 text-[clamp(22px,1.55vw,28px)] font-semibold leading-none tracking-[-0.05em] text-ash">
-          ( Navigate )
-        </p>
-        <div className="grid gap-3 text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash/86">
-          <a className="transition-opacity hover:opacity-70" href="#projects">
-            Work
-          </a>
-          <a className="transition-opacity hover:opacity-70" href="#about">
-            About
-          </a>
-        </div>
-      </motion.nav>
-
-      <motion.div
-        {...reveal}
-        className="col-span-2 mt-12 md:col-span-2 md:col-start-10 md:mt-0"
-      >
-        <p className="mb-8 text-[clamp(22px,1.55vw,28px)] font-semibold leading-none tracking-[-0.05em] text-ash">
-          ( Find Me )
-        </p>
-        <div className="grid gap-3 text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash/86">
-          <a className="transition-opacity hover:opacity-70" href="https://behance.net" rel="noreferrer" target="_blank">
-            Behance
-          </a>
-          <a className="transition-opacity hover:opacity-70" href="https://linkedin.com" rel="noreferrer" target="_blank">
-            Linkedin
-          </a>
-          <a className="transition-opacity hover:opacity-70" href="https://instagram.com" rel="noreferrer" target="_blank">
-            Ins
-          </a>
-        </div>
-      </motion.div>
-
-      <a
-        className="tight-link footer-back-link absolute bottom-10 left-[var(--page-x)] z-20"
-        href="#"
-      >
-        Back to top <span aria-hidden="true">↑</span>
-      </a>
-
-      <motion.div
-        {...reveal}
-        className="pointer-events-none absolute bottom-0 right-[var(--page-x)] h-[clamp(160px,20vw,300px)] w-[min(70vw,820px)] opacity-95"
-      >
-        <Image
-          alt="Zhang Xuan footer wordmark"
-          className="object-contain object-right-bottom"
-          fill
-          sizes="(max-width: 768px) 90vw, 900px"
-          src="/xuan-wordmark-crop.png"
-        />
-      </motion.div>
-    </footer>
   );
 }
 
