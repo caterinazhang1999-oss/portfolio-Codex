@@ -40,9 +40,9 @@ function WorkProjectRow({
       <div className="work-project-thumb">
         <Image
           alt={`${project.title} project cover`}
-          className="object-cover"
+          className="work-project-image object-cover"
           fill
-          sizes="(max-width: 768px) 34vw, 17vw"
+          sizes="(max-width: 767px) 132px, (max-width: 1100px) 24vw, 390px"
           src={project.image}
         />
       </div>
