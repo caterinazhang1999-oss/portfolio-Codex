@@ -67,7 +67,7 @@ button {
 }
 
 .hero-display-title {
-  transform: translateX(-24px);
+  transform: translateX(-40px);
 }
 
 .hero-display-title h1 {
@@ -262,7 +262,8 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .projects-intro {
-  grid-column: 3;
+  grid-column: 2;
+  justify-self: end;
   max-width: 34rem;
 }
 
