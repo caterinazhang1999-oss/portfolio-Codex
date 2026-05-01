@@ -66,6 +66,15 @@ button {
   line-height: 0.92;
 }
 
+.hero-display-title {
+  transform: translateX(-24px);
+}
+
+.hero-display-title h1 {
+  font-size: clamp(50px, 7.4vw, 133px);
+  font-weight: 800;
+}
+
 .section-title {
   font-family: var(--font-orbiter);
   font-weight: 600;
