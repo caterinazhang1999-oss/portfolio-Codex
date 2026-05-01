@@ -100,7 +100,7 @@ function ShowreelButton() {
 }
 
 const sectionTitleClass =
-  "col-span-4 text-[clamp(38px,5.8vw,92px)] font-semibold leading-[0.94] tracking-[-0.06em] text-white md:col-span-6";
+  "section-title col-span-4 text-[clamp(38px,5.8vw,92px)] font-semibold leading-[0.94] text-white md:col-span-6";
 
 function Hero() {
   return (
