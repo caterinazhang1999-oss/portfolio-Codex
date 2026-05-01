@@ -11,6 +11,7 @@ export type Project = {
   type: string;
   category: ProjectCategory[];
   image: string;
+  workImage: string;
   hoverImages: string[];
   description: string;
   href: string;
@@ -43,6 +44,7 @@ export const projects: Project[] = [
     type: "Brand System",
     category: ["Brand identity"],
     image: "/project-01.png",
+    workImage: "/work-project-01.png",
     hoverImages: [
       previewSwatch("#f05f57", "#3943b7", "#fff7e8"),
       previewSwatch("#19a974", "#f7c948", "#0a0a0a"),
@@ -59,6 +61,7 @@ export const projects: Project[] = [
     type: "Digital Product",
     category: ["Digital design", "Vibe coding"],
     image: "/project-02.png",
+    workImage: "/work-project-02.png",
     hoverImages: [
       previewSwatch("#6c63ff", "#101820", "#ffffff"),
       previewSwatch("#ffb000", "#073b4c", "#f7f4ef"),
@@ -75,6 +78,7 @@ export const projects: Project[] = [
     type: "Launch Design",
     category: ["Digital design", "Game design"],
     image: "/project-03.png",
+    workImage: "/work-project-03.png",
     hoverImages: [
       previewSwatch("#d7263d", "#1b998b", "#f5f1e8"),
       previewSwatch("#ff9f1c", "#2d3047", "#ffffff"),
@@ -91,6 +95,7 @@ export const projects: Project[] = [
     type: "Portfolio System",
     category: ["Brand identity", "Digital design"],
     image: "/project-04.png",
+    workImage: "/work-project-04.png",
     hoverImages: [
       previewSwatch("#4d908e", "#111111", "#f2f2f2"),
       previewSwatch("#f94144", "#f9c74f", "#151515"),

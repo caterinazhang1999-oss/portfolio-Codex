@@ -43,7 +43,7 @@ function WorkProjectRow({
           className="work-project-image object-cover"
           fill
           sizes="(max-width: 767px) 132px, (max-width: 1100px) 24vw, 390px"
-          src={project.image}
+          src={project.workImage}
         />
       </div>
       <div className="work-project-info">
