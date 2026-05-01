@@ -262,8 +262,8 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .projects-intro {
-  grid-column: 2;
-  justify-self: end;
+  grid-column: 3;
+  justify-self: start;
   max-width: 34rem;
 }
 
