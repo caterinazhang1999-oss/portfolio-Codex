@@ -154,6 +154,46 @@ button {
   opacity: 0.26;
 }
 
+.scroll-effect-layer {
+  transform-origin: center;
+  transition:
+    filter 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: filter, transform;
+}
+
+body.is-scrolling .scroll-effect-layer {
+  filter: blur(1.4px);
+  transform: scale(0.998);
+}
+
+body.is-scrolling.scroll-down .scroll-effect-layer {
+  transform: translateY(-3px) scale(0.998);
+}
+
+body.is-scrolling.scroll-up .scroll-effect-layer {
+  transform: translateY(3px) scale(0.998);
+}
+
+.capability-trail-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 850;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.capability-trail-item {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: clamp(144px, 12vw, 224px);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #111;
+  will-change: transform, opacity, filter;
+}
+
 .selected-projects {
   display: grid;
   overflow: hidden;
@@ -574,6 +614,7 @@ button {
 }
 
 @media (hover: none) {
+  .capability-trail-layer,
   .cursor-label {
     display: none;
   }
@@ -599,6 +640,14 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .scroll-effect-layer,
+  body.is-scrolling .scroll-effect-layer,
+  body.is-scrolling.scroll-down .scroll-effect-layer,
+  body.is-scrolling.scroll-up .scroll-effect-layer {
+    filter: none !important;
+    transform: none !important;
+  }
+
   *,
   *::before,
   *::after {

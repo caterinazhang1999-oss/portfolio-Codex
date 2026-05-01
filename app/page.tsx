@@ -16,8 +16,17 @@ import {
   FloatingCursorLabel,
   type CursorLabelState
 } from "../components/floating-cursor-label";
+import {
+  CapabilityImageTrail,
+  useCapabilityImageTrail
+} from "../components/capability-image-trail";
 import { Footer, Header, reveal } from "../components/site-chrome";
-import { capabilities, projects, type Project } from "../data/projects";
+import {
+  capabilities,
+  capabilityTrailImages,
+  projects,
+  type Project
+} from "../data/projects";
 
 function SplitHover({ children }: { children: string }) {
   return (
@@ -95,7 +104,7 @@ const sectionTitleClass =
 
 function Hero() {
   return (
-    <section className="layout-grid min-h-[560px] items-start pb-10 pt-[132px] md:min-h-[610px] md:pb-6 md:pt-[180px]">
+    <section className="layout-grid scroll-effect-layer min-h-[560px] items-start pb-10 pt-[132px] md:min-h-[610px] md:pb-6 md:pt-[180px]">
       <motion.div
         {...reveal}
         className="col-span-2 row-start-2 mt-8 md:col-span-2 md:row-start-1 md:mt-0"
@@ -138,7 +147,7 @@ function FeaturedVisual() {
   return (
     <motion.section
       {...reveal}
-      className="image-noise relative mx-[var(--page-x)] -mt-8 h-[360px] overflow-hidden bg-[#141414] md:-mt-12 md:h-[700px]"
+      className="image-noise scroll-effect-layer relative mx-[var(--page-x)] -mt-8 h-[360px] overflow-hidden bg-[#141414] md:-mt-12 md:h-[700px]"
     >
       <video
         aria-label="Featured motion reel"
@@ -514,7 +523,7 @@ function ProjectsEditorial() {
 
 function Projects() {
   return (
-    <section className="pt-24 md:pt-36">
+    <section className="scroll-effect-layer pt-24 md:pt-36">
       <SectionTitle title="About" />
       <PersonalIntro />
       <motion.div
@@ -530,8 +539,11 @@ function Projects() {
 }
 
 function Capabilities() {
+  const { getTrailHandlers, trailItems } =
+    useCapabilityImageTrail(capabilityTrailImages);
+
   return (
-    <section className="relative py-24 md:py-40" id="capabilities">
+    <section className="scroll-effect-layer relative py-24 md:py-40" id="capabilities">
       <motion.div {...reveal} className="layout-grid items-start">
         <h2 className={sectionTitleClass}>Capabilities</h2>
         <Link
@@ -547,6 +559,7 @@ function Capabilities() {
       >
         {capabilities.map((capability, index) => (
           <div
+            {...getTrailHandlers(capability)}
             className="group grid grid-cols-4 border-b border-ash/15 py-6 md:grid-cols-12 md:py-9"
             key={capability}
           >
@@ -557,6 +570,7 @@ function Capabilities() {
           </div>
         ))}
       </motion.div>
+      <CapabilityImageTrail items={trailItems} />
     </section>
   );
 }

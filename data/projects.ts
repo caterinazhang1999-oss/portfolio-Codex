@@ -121,3 +121,26 @@ export const capabilities = [
   "Game Design",
   "Vibe coding"
 ];
+
+export const capabilityTrailImages: Record<string, string[]> = {
+  "Brand Identity": [
+    "/work-project-01.png",
+    "/work-project-04.png",
+    "/project-01.png"
+  ],
+  "Digital Design": [
+    "/work-project-02.png",
+    "/work-project-01.png",
+    "/work-project-03.png"
+  ],
+  "Game Design": [
+    "/work-project-03.png",
+    "/work-project-02.png",
+    "/project-03.png"
+  ],
+  "Vibe coding": [
+    "/work-project-04.png",
+    "/work-project-02.png",
+    "/work-project-01.png"
+  ]
+};

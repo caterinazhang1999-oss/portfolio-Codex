@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 
 export type CursorLabelState = {
@@ -15,9 +17,18 @@ export function FloatingCursorLabel({
   x,
   y
 }: CursorLabelState) {
+  const [mounted, setMounted] = useState(false);
   const repeatedText = `${text} ·`;
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return createPortal(
     <motion.div
       animate={{
         opacity: visible ? 1 : 0,
@@ -42,6 +53,7 @@ export function FloatingCursorLabel({
           </span>
         ))}
       </div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }

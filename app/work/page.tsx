@@ -105,7 +105,7 @@ export default function WorkPage() {
       <Header />
       <div className="work-page">
         <main>
-          <section className="work-hero-section layout-grid">
+          <section className="work-hero-section layout-grid scroll-effect-layer">
             <motion.h1 {...reveal} className="work-page-title">
               WORK
             </motion.h1>
@@ -146,7 +146,7 @@ export default function WorkPage() {
             </div>
           </motion.section>
 
-          <section aria-label="Work projects" className="work-list">
+          <section aria-label="Work projects" className="work-list scroll-effect-layer">
             {filteredProjects.map((project) => (
               <WorkProjectRow
                 key={project.title}
