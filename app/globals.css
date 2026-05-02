@@ -120,6 +120,15 @@ button {
   overflow: visible;
 }
 
+.nav-elastic-line {
+  z-index: 1;
+}
+
+.nav-elastic-fill {
+  fill: #000;
+  opacity: 1;
+}
+
 .nav-elastic-path {
   fill: none;
   opacity: 0.78;

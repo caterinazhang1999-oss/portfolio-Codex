@@ -14,6 +14,10 @@ export const reveal = {
 
 export function Header() {
   const [navHovered, setNavHovered] = useState(false);
+  const linePath = navHovered ? "M 0 1 Q 50 38 100 1" : "M 0 1 Q 50 1 100 1";
+  const fillPath = navHovered
+    ? "M 0 0 H 100 V 1 Q 50 38 0 1 Z"
+    : "M 0 0 H 100 V 1 Q 50 1 0 1 Z";
 
   return (
     <header
@@ -56,9 +60,19 @@ export function Header() {
         viewBox="0 0 100 50"
       >
         <motion.path
-          animate={{
-            d: navHovered ? "M 0 1 Q 50 38 100 1" : "M 0 1 Q 50 1 100 1"
+          animate={{ d: fillPath }}
+          className="nav-elastic-fill"
+          fill="#000"
+          initial={false}
+          transition={{
+            damping: 13,
+            mass: 0.7,
+            stiffness: 180,
+            type: "spring"
           }}
+        />
+        <motion.path
+          animate={{ d: linePath }}
           className="nav-elastic-path"
           fill="none"
           initial={false}
