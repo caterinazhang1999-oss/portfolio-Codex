@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -14,17 +14,94 @@ export const reveal = {
 
 export function Header() {
   const [navHovered, setNavHovered] = useState(false);
-  const linePath = navHovered ? "M 0 1 Q 50 38 100 1" : "M 0 1 Q 50 1 100 1";
-  const fillPath = navHovered
-    ? "M 0 0 H 100 V 1 Q 50 38 0 1 Z"
-    : "M 0 0 H 100 V 1 Q 50 1 0 1 Z";
+  const [navControlX, setNavControlX] = useState(50);
+  const frameRef = useRef<number | null>(null);
+  const nextControlXRef = useRef(50);
+  const curveX = navHovered ? navControlX : 50;
+  const curveY = navHovered ? 118 : 80;
+  const glassPath = `M 0 0 H 100 V 80 Q ${curveX} ${curveY} 0 80 Z`;
+  const linePath = `M 0 80 Q ${curveX} ${curveY} 100 80`;
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, []);
+
+  const updateCurveControl = (event: MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    nextControlXRef.current = Math.min(
+      94,
+      Math.max(6, ((event.clientX - rect.left) / rect.width) * 100)
+    );
+
+    if (frameRef.current) {
+      return;
+    }
+
+    frameRef.current = window.requestAnimationFrame(() => {
+      setNavControlX(nextControlXRef.current);
+      frameRef.current = null;
+    });
+  };
 
   return (
     <header
-      className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start bg-black/90 pt-7 backdrop-blur-md md:pt-8"
+      className="nav-shell layout-grid fixed left-0 right-0 top-0 z-[1000] h-20 items-start pt-7 md:pt-8"
       onMouseEnter={() => setNavHovered(true)}
-      onMouseLeave={() => setNavHovered(false)}
+      onMouseLeave={() => {
+        setNavHovered(false);
+        setNavControlX(50);
+      }}
+      onMouseMove={updateCurveControl}
     >
+      <svg
+        aria-hidden="true"
+        className="nav-glass-svg pointer-events-none absolute left-0 top-0 h-32 w-full overflow-visible"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 128"
+      >
+        <defs>
+          <clipPath clipPathUnits="userSpaceOnUse" id="nav-glass-clip">
+            <motion.path
+              animate={{ d: glassPath }}
+              initial={false}
+              transition={{
+                damping: 13,
+                mass: 0.7,
+                stiffness: 180,
+                type: "spring"
+              }}
+            />
+          </clipPath>
+        </defs>
+        <foreignObject
+          clipPath="url(#nav-glass-clip)"
+          height="128"
+          width="100"
+          x="0"
+          y="0"
+        >
+          <div className="nav-glass-layer" />
+        </foreignObject>
+        <motion.path
+          animate={{ d: linePath }}
+          className="nav-elastic-path"
+          fill="none"
+          initial={false}
+          stroke="rgba(255,255,255,0.22)"
+          strokeWidth="1"
+          transition={{
+            damping: 13,
+            mass: 0.7,
+            stiffness: 180,
+            type: "spring"
+          }}
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
       <Link
         aria-label="Xuan home"
         className="relative col-span-1 h-10 w-9 md:h-11 md:w-10"
@@ -53,40 +130,6 @@ export function Header() {
       >
         Contacts
       </a>
-      <svg
-        aria-hidden="true"
-        className="nav-elastic-line pointer-events-none absolute left-0 top-full -mt-px h-12 w-full overflow-visible"
-        preserveAspectRatio="none"
-        viewBox="0 0 100 50"
-      >
-        <motion.path
-          animate={{ d: fillPath }}
-          className="nav-elastic-fill"
-          fill="#000"
-          initial={false}
-          transition={{
-            damping: 13,
-            mass: 0.7,
-            stiffness: 180,
-            type: "spring"
-          }}
-        />
-        <motion.path
-          animate={{ d: linePath }}
-          className="nav-elastic-path"
-          fill="none"
-          initial={false}
-          stroke="rgba(255,255,255,0.22)"
-          strokeWidth="1"
-          transition={{
-            damping: 13,
-            mass: 0.7,
-            stiffness: 180,
-            type: "spring"
-          }}
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
     </header>
   );
 }
