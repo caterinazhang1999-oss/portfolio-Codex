@@ -28,18 +28,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          crossOrigin="anonymous"
-          href="https://fonts.gstatic.com"
-          rel="preconnect"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className={`${manrope.variable} bg-carbon font-sans text-ash`}>
         <ScrollActivity />
         {children}

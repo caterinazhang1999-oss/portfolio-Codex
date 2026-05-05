@@ -2,13 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-Medium-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-MediumItalic-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-Bold-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-BoldItalic-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-Heavy-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-HeavyItalic-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-Super-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Druk Text Trial";
+  src: url("/fonts/DrukText-SuperItalic-Trial.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 900;
+}
+
 :root {
   --page-x: clamp(12px, 1.45vw, 22px);
   --grid-gap: clamp(12px, 1.25vw, 20px);
   --ash: #c5c5c5;
   --muted: rgba(197, 197, 197, 0.42);
   --line: rgba(197, 197, 197, 0.14);
-  --font-orbiter: "TASA Orbiter", var(--font-sans), sans-serif;
+  --font-display: "Druk Text Trial", var(--font-sans), sans-serif;
 }
 
 * {
@@ -58,12 +122,12 @@ button {
 }
 
 .display-title {
-  font-family: var(--font-orbiter);
+  font-family: var(--font-display);
   color: #fff;
-  font-size: clamp(59px, 8.7vw, 157px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  font-size: clamp(50px, 7.4vw, 133px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.07;
 }
 
 .hero-display-title {
@@ -71,14 +135,15 @@ button {
 }
 
 .hero-display-title h1 {
-  font-size: clamp(50px, 7.4vw, 133px);
-  font-weight: 800;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 .section-title {
-  font-family: var(--font-orbiter);
+  font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 
 .tight-link {
@@ -364,12 +429,12 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
 .work-page-title {
   grid-column: span 6;
-  font-family: var(--font-orbiter);
+  font-family: var(--font-display);
   color: #fff;
-  font-size: clamp(59px, 8.7vw, 157px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  font-size: clamp(50px, 7.4vw, 133px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.07;
 }
 
 .work-hero-copy {
@@ -377,13 +442,20 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   max-width: 34rem;
 }
 
-.work-hero-lede,
-.work-project-title {
-  font-family: var(--font-orbiter);
+.work-hero-lede {
   color: var(--ash);
   font-size: clamp(24px, 2vw, 38px);
   font-weight: 600;
   letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.work-project-title {
+  font-family: var(--font-display);
+  color: var(--ash);
+  font-size: clamp(24px, 2vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1.02;
 }
 

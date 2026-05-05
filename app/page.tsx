@@ -116,7 +116,7 @@ function Hero() {
         className="display-title hero-display-title col-span-4 row-start-1 text-white md:col-span-7 md:col-start-3"
       >
         <h1>
-          <span className="md:pl-[14%]">Hi,I&apos;am</span>
+          <span className="text-[#535353] md:pl-[14%]">Hi,I&apos;am</span>
           <br />
           <span className="md:pl-[14%]">Xuan ZHang</span>
         </h1>

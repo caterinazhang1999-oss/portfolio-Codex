@@ -116,7 +116,10 @@ export function Header() {
           src="/xuan-symbol-crop.png"
         />
       </Link>
-      <nav className="col-span-2 col-start-2 mt-[22px] flex justify-center gap-7 md:col-span-2 md:col-start-6 md:mt-[25px] md:gap-10">
+      <nav className="col-span-2 col-start-2 mt-[22px] flex justify-center gap-5 md:col-span-3 md:col-start-5 md:mt-[25px] md:gap-10">
+        <Link className="tight-link" href="/">
+          Home
+        </Link>
         <Link className="tight-link" href="/work">
           Work
         </Link>
