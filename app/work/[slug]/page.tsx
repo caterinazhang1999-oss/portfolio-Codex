@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Footer, Header } from "../../../components/site-chrome";
 import {
   getNextProject,
+  getPreviousProject,
   getProjectBySlug,
   projects,
   type Project
@@ -57,6 +58,7 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
 
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = getNextProject(project.slug);
+  const previousProject = getPreviousProject(project.slug);
 
   return (
     <>
@@ -137,19 +139,45 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
         ) : null}
 
         <section className="project-next-section">
-          <Link
-            aria-label={`Next project: ${nextProject.title}`}
-            className="project-next-link"
-            href={nextProject.href}
-          >
-            <span>
-              <span className="project-next-kicker">Next project</span>
-              <span className="project-next-title">{nextProject.title}</span>
-            </span>
-            <span aria-hidden="true" className="project-next-arrow">
-              →
-            </span>
-          </Link>
+          <div className="project-nav-shell">
+            <Link
+              aria-label={`Previous project: ${previousProject.title}`}
+              className="project-nav-link project-nav-link--previous"
+              href={previousProject.href}
+            >
+              <span aria-hidden="true" className="project-nav-arrow">
+                ←
+              </span>
+              <span className="project-nav-copy">
+                <span className="project-nav-kicker">Prev project</span>
+                <span className="project-nav-title">
+                  {previousProject.title}
+                </span>
+              </span>
+            </Link>
+
+            <Link
+              aria-label={`Open next project: ${nextProject.title}`}
+              className="project-nav-preview-link"
+              href={nextProject.href}
+            >
+              <span className="project-nav-preview" />
+            </Link>
+
+            <Link
+              aria-label={`Next project: ${nextProject.title}`}
+              className="project-nav-link project-nav-link--next"
+              href={nextProject.href}
+            >
+              <span className="project-nav-copy">
+                <span className="project-nav-kicker">Next project</span>
+                <span className="project-nav-title">{nextProject.title}</span>
+              </span>
+              <span aria-hidden="true" className="project-nav-arrow">
+                →
+              </span>
+            </Link>
+          </div>
         </section>
       </main>
       <Footer />

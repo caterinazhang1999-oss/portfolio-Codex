@@ -598,18 +598,28 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .project-detail-page {
+  --project-bg: #f4f4f1;
+  --project-dim: rgba(0, 0, 0, 0.34);
+  --project-line: rgba(0, 0, 0, 0.14);
+  --project-muted: rgba(0, 0, 0, 0.56);
+  --project-nav-height: 80px;
+  --project-text: #090909;
   overflow-x: clip;
-  background: #000;
-  color: var(--ash);
+  background: var(--project-bg);
+  color: var(--project-text);
 }
 
 .project-detail-hero {
-  padding: clamp(108px, 10vw, 158px) var(--page-x) clamp(64px, 8vw, 118px);
+  min-height: 100svh;
+  padding: var(--project-nav-height) 0 0;
+  background: #000;
 }
 
 .project-detail-hero-card {
   position: relative;
-  min-height: clamp(420px, calc(100svh - 132px), 760px);
+  width: 100%;
+  height: calc(100svh - var(--project-nav-height));
+  min-height: calc(100svh - var(--project-nav-height));
   overflow: hidden;
   background: #121212;
   isolation: isolate;
@@ -644,8 +654,8 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
 .project-detail-title {
   position: absolute;
-  bottom: clamp(24px, 4vw, 68px);
-  left: clamp(20px, 3vw, 58px);
+  bottom: clamp(16px, 2vw, 32px);
+  left: clamp(16px, 2vw, 32px);
   z-index: 2;
   max-width: 11ch;
   color: #fff;
@@ -657,7 +667,8 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .project-detail-intro {
-  border-top: 1px solid rgba(197, 197, 197, 0.18);
+  border-top: 1px solid var(--project-line);
+  background: var(--project-bg);
   padding-top: clamp(58px, 8vw, 126px);
   padding-bottom: clamp(74px, 10vw, 150px);
 }
@@ -669,7 +680,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 .project-eyebrow {
   display: block;
   margin-bottom: clamp(28px, 3vw, 46px);
-  color: var(--muted);
+  color: var(--project-muted);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -680,7 +691,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 .project-intro-copy p {
   max-width: 58rem;
   margin: 0;
-  color: var(--ash);
+  color: var(--project-text);
   font-size: clamp(29px, 4vw, 68px);
   font-weight: 600;
   letter-spacing: -0.055em;
@@ -693,7 +704,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
 .project-details-panel h2 {
   margin: 0 0 34px;
-  color: rgba(197, 197, 197, 0.72);
+  color: var(--project-muted);
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -710,11 +721,11 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 20px;
   padding: 18px 0;
-  border-top: 1px solid rgba(197, 197, 197, 0.16);
+  border-top: 1px solid var(--project-line);
 }
 
 .project-detail-row:last-child {
-  border-bottom: 1px solid rgba(197, 197, 197, 0.16);
+  border-bottom: 1px solid var(--project-line);
 }
 
 .project-detail-row dt,
@@ -727,18 +738,18 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .project-detail-row dt {
-  color: var(--muted);
+  color: var(--project-muted);
 }
 
 .project-detail-row dd {
-  color: var(--ash);
+  color: var(--project-text);
   text-align: right;
 }
 
 .project-media-section {
   padding: clamp(76px, 10vw, 160px) var(--page-x);
-  border-top: 1px solid rgba(197, 197, 197, 0.12);
-  background: #080808;
+  border-top: 1px solid var(--project-line);
+  background: var(--project-bg);
 }
 
 .project-media-grid {
@@ -752,7 +763,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   min-height: 280px;
   margin: 0;
   overflow: hidden;
-  background: #151515;
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .project-media-item[data-layout="portrait"] {
@@ -779,33 +790,55 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
 .project-next-section {
   padding: clamp(72px, 10vw, 154px) var(--page-x);
+  border-top: 1px solid var(--project-line);
+  background: var(--project-bg);
 }
 
-.project-next-link {
+.project-nav-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: end;
-  border-top: 1px solid rgba(197, 197, 197, 0.18);
-  border-bottom: 1px solid rgba(197, 197, 197, 0.18);
-  padding: clamp(34px, 5vw, 70px) 0;
-  color: var(--ash);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+  overflow: hidden;
+}
+
+.project-nav-link {
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  align-items: center;
+  gap: clamp(12px, 1.2vw, 22px);
+  color: var(--project-text);
   transition:
-    border-color 320ms ease,
     color 320ms ease,
-    padding-inline 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 320ms ease;
 }
 
-.project-next-link:hover {
-  border-color: rgba(255, 255, 255, 0.46);
-  color: #fff;
-  padding-inline: clamp(12px, 1.4vw, 24px);
+.project-nav-link:hover {
+  color: #000;
+  opacity: 0.68;
 }
 
-.project-next-kicker {
+.project-nav-link--previous {
+  grid-template-columns: auto minmax(0, 1fr);
+  justify-self: start;
+}
+
+.project-nav-link--next {
+  grid-template-columns: minmax(0, 1fr) auto;
+  justify-self: end;
+  text-align: right;
+}
+
+.project-nav-copy {
+  min-width: 0;
+  max-width: min(34vw, 720px);
+}
+
+.project-nav-kicker {
   display: block;
-  margin-bottom: 18px;
-  color: var(--muted);
+  margin-bottom: 14px;
+  color: var(--project-muted);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -813,20 +846,54 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   text-transform: uppercase;
 }
 
-.project-next-title {
+.project-nav-title {
   display: block;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--project-text);
   font-family: "Druk Text Trial", var(--font-sans), sans-serif;
-  font-size: clamp(58px, 10vw, 160px);
+  font-size: clamp(36px, 5vw, 92px);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 0.9;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.project-next-arrow {
+.project-nav-arrow {
   color: currentColor;
-  font-size: clamp(44px, 6vw, 94px);
+  font-size: clamp(34px, 4.4vw, 72px);
   font-weight: 600;
   line-height: 0.9;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-nav-link--previous:hover .project-nav-arrow {
+  transform: translateX(-8px);
+}
+
+.project-nav-link--next:hover .project-nav-arrow {
+  transform: translateX(8px);
+}
+
+.project-nav-preview-link {
+  display: block;
+  justify-self: center;
+}
+
+.project-nav-preview {
+  display: block;
+  width: clamp(180px, 18vw, 320px);
+  aspect-ratio: 16 / 9;
+  background: #643cc8;
+  transition:
+    filter 320ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-nav-preview-link:hover .project-nav-preview {
+  filter: brightness(1.08);
+  transform: scale(1.025);
 }
 
 .cursor-label {
@@ -970,12 +1037,12 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   }
 
   .project-detail-hero {
-    padding-top: 118px;
-    padding-bottom: 50px;
+    padding: var(--project-nav-height) 0 0;
   }
 
   .project-detail-hero-card {
-    min-height: 64svh;
+    height: calc(100svh - var(--project-nav-height));
+    min-height: calc(100svh - var(--project-nav-height));
   }
 
   .project-detail-index {
@@ -984,6 +1051,8 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   }
 
   .project-detail-title {
+    bottom: clamp(16px, 5vw, 24px);
+    left: clamp(16px, 5vw, 24px);
     max-width: 9ch;
     font-size: clamp(52px, 18vw, 88px);
   }
@@ -1022,13 +1091,35 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
     margin-top: 0;
   }
 
-  .project-next-link {
+  .project-nav-shell {
     grid-template-columns: 1fr;
     gap: 28px;
   }
 
-  .project-next-arrow {
-    justify-self: start;
+  .project-nav-preview-link {
+    order: 1;
+    justify-self: stretch;
+  }
+
+  .project-nav-preview {
+    width: 100%;
+  }
+
+  .project-nav-link--previous {
+    order: 2;
+  }
+
+  .project-nav-link--next {
+    order: 3;
+    justify-self: stretch;
+  }
+
+  .project-nav-copy {
+    max-width: 100%;
+  }
+
+  .project-nav-title {
+    white-space: normal;
   }
 }
 

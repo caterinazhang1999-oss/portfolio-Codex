@@ -193,6 +193,16 @@ export function getNextProject(slug: string) {
   return projects[(currentIndex + 1) % projects.length];
 }
 
+export function getPreviousProject(slug: string) {
+  const currentIndex = projects.findIndex((project) => project.slug === slug);
+
+  if (currentIndex === -1) {
+    return projects[projects.length - 1];
+  }
+
+  return projects[(currentIndex - 1 + projects.length) % projects.length];
+}
+
 export const projectCategories = [
   "ALL",
   "Brand identity",
