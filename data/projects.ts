@@ -5,6 +5,7 @@ export type ProjectCategory =
   | "Vibe coding";
 
 export type Project = {
+  slug: string;
   title: string;
   year: string;
   role: string;
@@ -12,8 +13,15 @@ export type Project = {
   category: ProjectCategory[];
   image: string;
   workImage: string;
+  heroImage: string;
   hoverImages: string[];
   description: string;
+  intro: string;
+  gallery: {
+    alt: string;
+    layout?: "portrait" | "landscape" | "wide" | "square";
+    src: string;
+  }[];
   href: string;
 };
 
@@ -38,6 +46,7 @@ function previewSwatch(from: string, to: string, accent: string) {
 
 export const projects: Project[] = [
   {
+    slug: "noir-supply",
     title: "Noir Supply",
     year: "2026",
     role: "Identity / Packaging",
@@ -45,6 +54,7 @@ export const projects: Project[] = [
     category: ["Brand identity"],
     image: "/project-01.png",
     workImage: "/work-project-01.png",
+    heroImage: "/work-project-01.png",
     hoverImages: [
       previewSwatch("#f05f57", "#3943b7", "#fff7e8"),
       previewSwatch("#19a974", "#f7c948", "#0a0a0a"),
@@ -52,9 +62,24 @@ export const projects: Project[] = [
     ],
     description:
       "A restrained visual identity for a premium materials studio, built around severe typography and tactile monochrome surfaces.",
-    href: "#contact"
+    intro:
+      "Noir Supply builds a severe, tactile brand world for a premium materials studio, using monochrome restraint, dense typography, and quiet packaging details to make the system feel deliberate before it feels decorative.",
+    gallery: [
+      {
+        alt: "Noir Supply identity surface",
+        layout: "landscape",
+        src: "/project-01.png"
+      },
+      {
+        alt: "Noir Supply brand application",
+        layout: "wide",
+        src: "/work-project-01.png"
+      }
+    ],
+    href: "/work/noir-supply"
   },
   {
+    slug: "ledger-north",
     title: "Ledger North",
     year: "2025",
     role: "UI / Art Direction",
@@ -62,6 +87,7 @@ export const projects: Project[] = [
     category: ["Digital design", "Vibe coding"],
     image: "/project-02.png",
     workImage: "/work-project-02.png",
+    heroImage: "/work-project-02.png",
     hoverImages: [
       previewSwatch("#6c63ff", "#101820", "#ffffff"),
       previewSwatch("#ffb000", "#073b4c", "#f7f4ef"),
@@ -69,9 +95,24 @@ export const projects: Project[] = [
     ],
     description:
       "A finance dashboard concept with editorial hierarchy, quiet data density, and a cinematic product reveal.",
-    href: "#contact"
+    intro:
+      "Ledger North turns dense financial information into an editorial product experience, balancing quiet data hierarchy, precise interaction moments, and a cinematic reveal system that keeps the interface calm under pressure.",
+    gallery: [
+      {
+        alt: "Ledger North digital product overview",
+        layout: "landscape",
+        src: "/project-02.png"
+      },
+      {
+        alt: "Ledger North interface presentation",
+        layout: "wide",
+        src: "/work-project-02.png"
+      }
+    ],
+    href: "/work/ledger-north"
   },
   {
+    slug: "signal-room",
     title: "Signal Room",
     year: "2025",
     role: "Campaign / Motion",
@@ -79,6 +120,7 @@ export const projects: Project[] = [
     category: ["Digital design", "Game design"],
     image: "/project-03.png",
     workImage: "/work-project-03.png",
+    heroImage: "/work-project-03.png",
     hoverImages: [
       previewSwatch("#d7263d", "#1b998b", "#f5f1e8"),
       previewSwatch("#ff9f1c", "#2d3047", "#ffffff"),
@@ -86,9 +128,24 @@ export const projects: Project[] = [
     ],
     description:
       "A launch language for an audio platform using modular frames, compressed type, and controlled luminous accents.",
-    href: "#contact"
+    intro:
+      "Signal Room creates a launch language for an audio platform, using modular framing, compressed typography, and controlled luminous accents to make every campaign touchpoint feel rhythmic and direct.",
+    gallery: [
+      {
+        alt: "Signal Room launch design billboard",
+        layout: "landscape",
+        src: "/project-03.png"
+      },
+      {
+        alt: "Signal Room campaign system",
+        layout: "wide",
+        src: "/work-project-03.png"
+      }
+    ],
+    href: "/work/signal-room"
   },
   {
+    slug: "arc-atelier",
     title: "Arc Atelier",
     year: "2024",
     role: "Brand / Web",
@@ -96,6 +153,7 @@ export const projects: Project[] = [
     category: ["Brand identity", "Digital design"],
     image: "/project-04.png",
     workImage: "/work-project-04.png",
+    heroImage: "/work-project-04.png",
     hoverImages: [
       previewSwatch("#4d908e", "#111111", "#f2f2f2"),
       previewSwatch("#f94144", "#f9c74f", "#151515"),
@@ -103,9 +161,37 @@ export const projects: Project[] = [
     ],
     description:
       "A digital gallery for an architectural practice, balancing calm project photography with precise navigation.",
-    href: "#contact"
+    intro:
+      "Arc Atelier is a portfolio system for an architectural practice, designed around calm project photography, generous pacing, and navigation that feels precise without interrupting the atmosphere of the work.",
+    gallery: [
+      {
+        alt: "Arc Atelier portfolio system",
+        layout: "landscape",
+        src: "/project-04.png"
+      },
+      {
+        alt: "Arc Atelier brand and web presentation",
+        layout: "wide",
+        src: "/work-project-04.png"
+      }
+    ],
+    href: "/work/arc-atelier"
   }
 ];
+
+export function getProjectBySlug(slug: string) {
+  return projects.find((project) => project.slug === slug);
+}
+
+export function getNextProject(slug: string) {
+  const currentIndex = projects.findIndex((project) => project.slug === slug);
+
+  if (currentIndex === -1) {
+    return projects[0];
+  }
+
+  return projects[(currentIndex + 1) % projects.length];
+}
 
 export const projectCategories = [
   "ALL",
