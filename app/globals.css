@@ -305,6 +305,41 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   will-change: transform, opacity, filter;
 }
 
+.about-light-section {
+  --about-bg: #f4f4f1;
+  --about-dim: rgba(0, 0, 0, 0.34);
+  --about-line: rgba(0, 0, 0, 0.14);
+  --about-muted: rgba(0, 0, 0, 0.56);
+  --about-text: #090909;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.026) 1px, transparent 1px),
+    var(--about-bg);
+  background-size: 100% 86px, 86px 100%;
+  color: var(--about-text);
+}
+
+.about-light-section .section-title {
+  color: var(--about-text);
+}
+
+.about-light-section #about {
+  border-color: var(--about-line);
+}
+
+.about-light-section #about > div:first-child > p,
+.about-light-section #about > div:nth-child(2) > div > div p {
+  color: var(--about-text);
+}
+
+.about-light-section #about > div:nth-child(2) > div > p {
+  color: var(--about-muted);
+}
+
+.about-light-section #about > div:nth-child(2) > div > ul {
+  color: rgba(0, 0, 0, 0.72);
+}
+
 .selected-projects {
   display: grid;
   overflow: hidden;

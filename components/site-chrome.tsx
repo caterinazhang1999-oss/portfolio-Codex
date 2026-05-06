@@ -140,7 +140,7 @@ export function Header() {
 export function Footer() {
   return (
     <footer
-      className="layout-grid scroll-effect-layer relative min-h-[760px] overflow-hidden border-t border-ash/25 pb-10 pt-16 md:min-h-[820px] md:pt-20"
+      className="layout-grid scroll-effect-layer relative min-h-[738px] overflow-hidden border-t border-ash/25 pb-10 pt-16 md:min-h-[730px] md:pt-20"
       id="contact"
     >
       <motion.div {...reveal} className="col-span-4 md:col-span-4">

@@ -524,8 +524,10 @@ function ProjectsEditorial() {
 function Projects() {
   return (
     <section className="scroll-effect-layer pt-24 md:pt-36">
-      <SectionTitle title="About" />
-      <PersonalIntro />
+      <div className="about-light-section">
+        <SectionTitle title="About" />
+        <PersonalIntro />
+      </div>
       <motion.div
         id="projects"
         {...reveal}
