@@ -116,7 +116,7 @@ export function Header() {
           src="/xuan-symbol-crop.png"
         />
       </Link>
-      <nav className="col-span-2 col-start-2 mt-[22px] flex justify-center gap-5 md:col-span-3 md:col-start-5 md:mt-[25px] md:gap-10">
+      <nav className="nav-center-group">
         <Link className="tight-link" href="/">
           Home
         </Link>
@@ -206,7 +206,7 @@ export function Footer() {
       </motion.div>
 
       <a
-        className="tight-link footer-back-link absolute bottom-10 left-[var(--page-x)] z-20"
+        className="tight-link footer-back-link absolute left-[var(--page-x)] z-20"
         href="#"
       >
         Back to top <span aria-hidden="true">↑</span>

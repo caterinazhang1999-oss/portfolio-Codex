@@ -122,7 +122,7 @@ button {
 }
 
 .display-title {
-  font-family: var(--font-display);
+  font-family: "Druk Text Trial", var(--font-sans), sans-serif;
   color: #fff;
   font-size: clamp(50px, 7.4vw, 133px);
   font-weight: 900;
@@ -141,7 +141,7 @@ button {
 }
 
 .section-title {
-  font-family: var(--font-display);
+  font-family: "Druk Text Trial", var(--font-sans), sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -177,12 +177,24 @@ button {
 }
 
 .footer-back-link {
+  bottom: 4px;
   position: absolute;
   text-transform: none;
 }
 
 .nav-shell {
   overflow: visible;
+}
+
+.nav-center-group {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transform: translateX(-50%);
 }
 
 .nav-shell > a,
@@ -429,7 +441,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
 .work-page-title {
   grid-column: span 6;
-  font-family: var(--font-display);
+  font-family: "Druk Text Trial", var(--font-sans), sans-serif;
   color: #fff;
   font-size: clamp(50px, 7.4vw, 133px);
   font-weight: 900;
@@ -451,7 +463,7 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 }
 
 .work-project-title {
-  font-family: var(--font-display);
+  font-family: "Druk Text Trial", var(--font-sans), sans-serif;
   color: var(--ash);
   font-size: clamp(24px, 2vw, 38px);
   font-weight: 600;
@@ -684,6 +696,10 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
     gap: 64px;
   }
 
+  .nav-center-group {
+    gap: 1.25rem;
+  }
+
   .project-card--small,
   .project-card--large {
     flex: none;
@@ -719,6 +735,13 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
 
   .work-project-meta {
     margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-center-group {
+    top: 25px;
+    gap: 2.5rem;
   }
 }
 
