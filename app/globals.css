@@ -311,11 +311,9 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   --about-line: rgba(0, 0, 0, 0.14);
   --about-muted: rgba(0, 0, 0, 0.56);
   --about-text: #090909;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.026) 1px, transparent 1px),
-    var(--about-bg);
-  background-size: 100% 86px, 86px 100%;
+  padding-block: 40px;
+  background-color: var(--about-bg);
+  background-image: none;
   color: var(--about-text);
 }
 
