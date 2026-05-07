@@ -254,7 +254,7 @@ button {
 }
 
 footer :is(a, button) {
-  font-family: "Druk Text Trial", var(--font-display), var(--font-sans), sans-serif !important;
+  font-family: "Druk Text Trial", var(--font-sans), sans-serif !important;
 }
 
 .image-noise::after {
