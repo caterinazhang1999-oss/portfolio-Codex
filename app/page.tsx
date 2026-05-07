@@ -24,6 +24,7 @@ import { Footer, Header, reveal } from "../components/site-chrome";
 import {
   capabilities,
   capabilityTrailImages,
+  categoryToSlug,
   projects,
   type Project
 } from "../data/projects";
@@ -560,16 +561,19 @@ function Capabilities() {
         className="mx-[var(--page-x)] mt-14 border-t border-ash/15 md:mt-20"
       >
         {capabilities.map((capability, index) => (
-          <div
+          <Link
             {...getTrailHandlers(capability)}
             className="group grid grid-cols-4 border-b border-ash/15 py-6 md:grid-cols-12 md:py-9"
+            href={`/work?category=${
+              categoryToSlug[capability as keyof typeof categoryToSlug]
+            }`}
             key={capability}
           >
             <span className="micro-label col-span-1">0{index + 1}</span>
             <h3 className="col-span-3 text-[clamp(34px,6vw,102px)] font-semibold leading-[0.9] tracking-[-0.06em] text-ash transition-transform duration-500 group-hover:translate-x-3 md:col-span-8 md:col-start-3">
               <SplitHover>{capability}</SplitHover>
             </h3>
-          </div>
+          </Link>
         ))}
       </motion.div>
       <CapabilityImageTrail items={trailItems} />

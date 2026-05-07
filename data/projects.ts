@@ -2,7 +2,8 @@ export type ProjectCategory =
   | "Brand identity"
   | "Digital design"
   | "Game design"
-  | "Vibe coding";
+  | "Vibe coding"
+  | "OTHER";
 
 export type Project = {
   slug: string;
@@ -205,11 +206,51 @@ export function getPreviousProject(slug: string) {
 
 export const projectCategories = [
   "ALL",
-  "Brand identity",
-  "Digital design",
-  "Game design",
-  "Vibe coding"
+  "Brand Identity",
+  "Digital Design",
+  "Game Design",
+  "Vibe coding",
+  "OTHER"
 ] as const;
+
+export type WorkFilterCategory = (typeof projectCategories)[number];
+
+export const categorySlugMap: Record<string, WorkFilterCategory> = {
+  all: "ALL",
+  "brand-identity": "Brand Identity",
+  "digital-design": "Digital Design",
+  "game-design": "Game Design",
+  other: "OTHER",
+  "vibe-coding": "Vibe coding"
+};
+
+export const categoryToSlug: Record<WorkFilterCategory, string> = {
+  ALL: "all",
+  "Brand Identity": "brand-identity",
+  "Digital Design": "digital-design",
+  "Game Design": "game-design",
+  OTHER: "other",
+  "Vibe coding": "vibe-coding"
+};
+
+export const categoryFilterValues: Record<
+  Exclude<WorkFilterCategory, "ALL">,
+  ProjectCategory
+> = {
+  "Brand Identity": "Brand identity",
+  "Digital Design": "Digital design",
+  "Game Design": "Game design",
+  OTHER: "OTHER",
+  "Vibe coding": "Vibe coding"
+};
+
+export function getCategoryFromSlug(slug: string | null | undefined) {
+  if (!slug) {
+    return "ALL";
+  }
+
+  return categorySlugMap[slug] ?? "ALL";
+}
 
 export const capabilities = [
   "Brand Identity",

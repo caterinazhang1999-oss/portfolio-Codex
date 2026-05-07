@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type MouseEvent } from "react";
+import { useEffect, useMemo, useState, type MouseEvent } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -9,13 +9,16 @@ import {
 } from "../../components/floating-cursor-label";
 import { Footer, Header, reveal } from "../../components/site-chrome";
 import {
+  categoryFilterValues,
+  categoryToSlug,
+  getCategoryFromSlug,
   projectCategories,
   projects,
   type Project,
-  type ProjectCategory
+  type WorkFilterCategory
 } from "../../data/projects";
 
-type ActiveCategory = (typeof projectCategories)[number];
+type ActiveCategory = WorkFilterCategory;
 
 function WorkProjectRow({
   onCursorEnter,
@@ -67,13 +70,29 @@ export default function WorkPage() {
     y: 0
   });
 
+  useEffect(() => {
+    const syncCategoryFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      setActiveCategory(getCategoryFromSlug(params.get("category")));
+    };
+
+    syncCategoryFromUrl();
+    window.addEventListener("popstate", syncCategoryFromUrl);
+
+    return () => {
+      window.removeEventListener("popstate", syncCategoryFromUrl);
+    };
+  }, []);
+
   const filteredProjects = useMemo(() => {
     if (activeCategory === "ALL") {
       return projects;
     }
 
+    const dataCategory = categoryFilterValues[activeCategory];
+
     return projects.filter((project) =>
-      project.category.includes(activeCategory as ProjectCategory)
+      project.category.includes(dataCategory)
     );
   }, [activeCategory]);
 
@@ -98,6 +117,15 @@ export default function WorkPage() {
       ...current,
       visible: false
     }));
+  };
+
+  const updateActiveCategory = (category: ActiveCategory) => {
+    setActiveCategory(category);
+    hideProjectCursor();
+
+    const slug = categoryToSlug[category];
+    const nextUrl = category === "ALL" ? "/work" : `/work?category=${slug}`;
+    window.history.pushState(null, "", nextUrl);
   };
 
   return (
@@ -135,8 +163,7 @@ export default function WorkPage() {
                   ].join(" ")}
                   key={category}
                   onClick={() => {
-                    setActiveCategory(category);
-                    hideProjectCursor();
+                    updateActiveCategory(category);
                   }}
                   type="button"
                 >
