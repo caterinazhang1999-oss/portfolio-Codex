@@ -161,6 +161,9 @@ export function Footer() {
           ( Navigate )
         </p>
         <div className="grid gap-3 text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash/86">
+          <Link className="transition-opacity hover:opacity-70" href="/">
+            Home
+          </Link>
           <Link className="transition-opacity hover:opacity-70" href="/work">
             Work
           </Link>

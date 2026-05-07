@@ -248,6 +248,15 @@ button {
   transform: translateY(-105%);
 }
 
+#capabilities .char-swap {
+  height: 1.08em;
+  margin-bottom: -0.08em;
+}
+
+footer :is(a, button) {
+  font-family: "Druk Text Trial", var(--font-display), var(--font-sans), sans-serif !important;
+}
+
 .image-noise::after {
   position: absolute;
   inset: 0;
