@@ -52,5 +52,5 @@ export function ScrollActivity() {
     };
   }, []);
 
-  return null;
+  return <div aria-hidden="true" className="scroll-bottom-blur" />;
 }

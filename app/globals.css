@@ -268,13 +268,11 @@ button {
 .scroll-effect-layer {
   transform-origin: center;
   transition:
-    filter 260ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: filter, transform;
+  will-change: transform;
 }
 
 body.is-scrolling .scroll-effect-layer {
-  filter: blur(1.4px);
   transform: scale(0.998);
 }
 
@@ -284,6 +282,39 @@ body.is-scrolling.scroll-down .scroll-effect-layer {
 
 body.is-scrolling.scroll-up .scroll-effect-layer {
   transform: translateY(3px) scale(0.998);
+}
+
+.scroll-bottom-blur {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 900;
+  height: 20vh;
+  background: rgba(255, 255, 255, 0.001);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.72) 35%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.72) 35%,
+    rgba(0, 0, 0, 0.28) 68%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.is-scrolling .scroll-bottom-blur {
+  opacity: 1;
 }
 
 .capability-trail-layer {
@@ -1196,6 +1227,10 @@ body.is-scrolling.scroll-up .scroll-effect-layer {
   body.is-scrolling.scroll-up .scroll-effect-layer {
     filter: none !important;
     transform: none !important;
+  }
+
+  .scroll-bottom-blur {
+    display: none !important;
   }
 
   *,
