@@ -204,26 +204,26 @@ function PersonalIntro() {
         <div className="grid gap-y-14 md:grid-cols-8 md:gap-x-[var(--grid-gap)] md:gap-y-28">
           <div className="md:col-span-3 md:col-start-1">
             <p className="text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash">
-              Driven by Design
+              My design thinking
             </p>
           </div>
           <p className="max-w-[33rem] text-[clamp(20px,1.45vw,27px)] font-semibold leading-[1.35] tracking-[-0.045em] text-ash/78 md:col-span-4 md:col-start-5">
-            Every project begins with intent and ends with impact. I bring
-            clarity, craft, and vision together, creating work that speaks
-            louder than words.
+            As a web designer and graphic designer, I adhere to a user-centered
+            design philosophy that focuses on the client&apos;s needs and browsing
+            experience.
           </p>
 
           <div className="md:col-span-3 md:col-start-1">
             <p className="text-[clamp(22px,1.55vw,28px)] font-semibold leading-[1.05] tracking-[-0.05em] text-ash">
-              Trusted by Brands
+              Education
             </p>
           </div>
           <ul className="space-y-3 text-[clamp(20px,1.45vw,27px)] font-semibold leading-[1.08] tracking-[-0.045em] text-ash/82 md:col-span-3 md:col-start-5">
-            <li>Atelier Norra</li>
-            <li>Velin Studio</li>
-            <li>Forma Objects</li>
-            <li>Kairos Living</li>
-            <li>Orion</li>
+            <li>Hunan University of Commerce (Bachelor&apos;s degree-China)</li>
+            <li>
+              Accademia Ligustica di Belle Arti di Genova (Master&apos;s
+              degree-Italy)
+            </li>
           </ul>
         </div>
       </div>
