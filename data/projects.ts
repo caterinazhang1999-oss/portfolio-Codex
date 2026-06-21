@@ -14,6 +14,10 @@ export type Project = {
   category: ProjectCategory[];
   image: string;
   workImage: string;
+  workTitle?: string;
+  workMeta?: string;
+  workYear?: string;
+  workHref?: string;
   heroImage: string;
   hoverImages: string[];
   description: string;
@@ -55,6 +59,11 @@ export const projects: Project[] = [
     category: ["Brand identity"],
     image: "/project-01.png",
     workImage: "/work-project-01.png",
+    workTitle: "URKA BIG",
+    workMeta: "Web design/UI,UX design/Brand identity",
+    workYear: "2025",
+    workHref:
+      "https://www.behance.net/gallery/244151495/URKA-Visual-Experience-Upgrade-and-Website-Design",
     heroImage: "/work-project-01.png",
     hoverImages: [
       previewSwatch("#f05f57", "#3943b7", "#fff7e8"),
@@ -88,6 +97,8 @@ export const projects: Project[] = [
     category: ["Digital design", "Vibe coding"],
     image: "/project-02.png",
     workImage: "/work-project-02.png",
+    workHref:
+      "https://www.behance.net/gallery/244144689/Luxury-Cruise-Website-Concept-(Case-Study-Silversea)",
     heroImage: "/work-project-02.png",
     hoverImages: [
       previewSwatch("#6c63ff", "#101820", "#ffffff"),
@@ -121,6 +132,8 @@ export const projects: Project[] = [
     category: ["Digital design", "Game design"],
     image: "/project-03.png",
     workImage: "/work-project-03.png",
+    workHref:
+      "https://www.behance.net/gallery/244137467/La-forma-della-tempo-",
     heroImage: "/work-project-03.png",
     hoverImages: [
       previewSwatch("#d7263d", "#1b998b", "#f5f1e8"),

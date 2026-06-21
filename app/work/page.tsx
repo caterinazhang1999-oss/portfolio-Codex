@@ -31,11 +31,17 @@ function WorkProjectRow({
   onCursorMove: (event: MouseEvent<HTMLElement>) => void;
   project: Project;
 }) {
+  const workHref = project.workHref ?? project.href;
+  const workTitle = project.workTitle ?? project.title;
+  const workMeta =
+    project.workMeta ?? `${project.category.join(" / ")} · ${project.type}`;
+  const workYear = project.workYear ?? project.year;
+
   return (
     <motion.a
       {...reveal}
       className="work-project-row"
-      href={project.href}
+      href={workHref}
       onMouseEnter={onCursorEnter}
       onMouseLeave={onCursorLeave}
       onMouseMove={onCursorMove}
@@ -50,12 +56,10 @@ function WorkProjectRow({
         />
       </div>
       <div className="work-project-info">
-        <h2 className="work-project-title">{project.title}</h2>
-        <p className="work-project-meta">
-          {project.category.join(" / ")} · {project.type}
-        </p>
+        <h2 className="work-project-title">{workTitle}</h2>
+        <p className="work-project-meta">{workMeta}</p>
       </div>
-      <span className="work-project-year">{project.year}</span>
+      <span className="work-project-year">{workYear}</span>
     </motion.a>
   );
 }
@@ -99,7 +103,7 @@ export default function WorkPage() {
   const showProjectCursor = (project: Project) => {
     setCursorLabel((current) => ({
       ...current,
-      text: `${project.title} · VIEW PROJECT`,
+      text: `${project.workTitle ?? project.title} · VIEW PROJECT`,
       visible: true
     }));
   };
