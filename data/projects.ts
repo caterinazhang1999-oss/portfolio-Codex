@@ -14,10 +14,15 @@ export type Project = {
   category: ProjectCategory[];
   image: string;
   workImage: string;
+  featuredDescription?: string;
+  featuredMeta?: string;
+  featuredRole?: string;
+  featuredTitle?: string;
   workTitle?: string;
   workMeta?: string;
   workYear?: string;
   workHref?: string;
+  workOrder?: number;
   heroImage: string;
   hoverImages: string[];
   description: string;
@@ -56,9 +61,14 @@ export const projects: Project[] = [
     year: "2026",
     role: "Identity / Packaging",
     type: "Brand System",
-    category: ["Brand identity"],
+    category: ["Digital design"],
     image: "/project-01.png",
     workImage: "/work-project-01.png",
+    featuredDescription:
+      "Redefining the URKA–BIG brand relationship and building a clearer path from local design engagement to event conversion and post-event creative connection.",
+    featuredMeta: "2025",
+    featuredRole: "Digital design",
+    featuredTitle: "URKA BIG",
     workTitle: "URKA BIG",
     workMeta: "Web design/UI,UX design/Brand identity",
     workYear: "2025",
@@ -66,9 +76,10 @@ export const projects: Project[] = [
       "https://www.behance.net/gallery/244151495/URKA-Visual-Experience-Upgrade-and-Website-Design",
     heroImage: "/work-project-01.png",
     hoverImages: [
-      previewSwatch("#f05f57", "#3943b7", "#fff7e8"),
-      previewSwatch("#19a974", "#f7c948", "#0a0a0a"),
-      previewSwatch("#f8b6d2", "#62c6ff", "#ffffff")
+      "/urka-hover-01.png",
+      "/urka-hover-02.png",
+      "/urka-hover-03.jpg",
+      "/urka-hover-04.png"
     ],
     description:
       "A restrained visual identity for a premium materials studio, built around severe typography and tactile monochrome surfaces.",
@@ -94,16 +105,24 @@ export const projects: Project[] = [
     year: "2025",
     role: "UI / Art Direction",
     type: "Digital Product",
-    category: ["Digital design", "Vibe coding"],
+    category: ["Digital design"],
     image: "/project-02.png",
     workImage: "/work-project-02.png",
+    featuredDescription:
+      "Cruise Project: Brand Extension and User Booking Flow Design",
+    featuredMeta: "2025",
+    featuredRole: "Digital design",
+    featuredTitle: "Silevrsea",
+    workTitle: "Silversea",
+    workMeta: "Digital design",
     workHref:
       "https://www.behance.net/gallery/244144689/Luxury-Cruise-Website-Concept-(Case-Study-Silversea)",
     heroImage: "/work-project-02.png",
     hoverImages: [
-      previewSwatch("#6c63ff", "#101820", "#ffffff"),
-      previewSwatch("#ffb000", "#073b4c", "#f7f4ef"),
-      previewSwatch("#2ec4b6", "#ff3366", "#050505")
+      "/silversea-hover-01.png",
+      "/silversea-hover-02.png",
+      "/silversea-hover-03.png",
+      "/silversea-hover-04.png"
     ],
     description:
       "A finance dashboard concept with editorial hierarchy, quiet data density, and a cinematic product reveal.",
@@ -129,9 +148,16 @@ export const projects: Project[] = [
     year: "2025",
     role: "Campaign / Motion",
     type: "Launch Design",
-    category: ["Digital design", "Game design"],
-    image: "/project-03.png",
+    category: ["Brand identity"],
+    image: "/signal-room-feature.jpg",
     workImage: "/work-project-03.png",
+    featuredDescription:
+      "A game-based learning project inspired by the TV series Blossoms Shanghai. This project is created solely for personal learning and design practice, with no commercial purpose. If any copyright issue arises, the related content can be removed immediately.",
+    featuredMeta: "2024",
+    featuredRole: "Game design / case study",
+    featuredTitle: "Bloom",
+    workTitle: "La Forma del tempo",
+    workMeta: "Branding,Art direction",
     workHref:
       "https://www.behance.net/gallery/244137467/La-forma-della-tempo-",
     heroImage: "/work-project-03.png",
@@ -164,9 +190,11 @@ export const projects: Project[] = [
     year: "2024",
     role: "Brand / Web",
     type: "Portfolio System",
-    category: ["Brand identity", "Digital design"],
+    category: ["Brand identity"],
     image: "/project-04.png",
     workImage: "/work-project-04.png",
+    workTitle: "The Bear",
+    workMeta: "Branding",
     heroImage: "/work-project-04.png",
     hoverImages: [
       previewSwatch("#4d908e", "#111111", "#f2f2f2"),
@@ -190,6 +218,223 @@ export const projects: Project[] = [
       }
     ],
     href: "/work/arc-atelier"
+  },
+  {
+    slug: "archive-05",
+    title: "Redo",
+    year: "2023",
+    role: "Brand / Art Direction",
+    type: "Identity System",
+    category: ["Digital design"],
+    image: "/work-redo.jpg",
+    workImage: "/work-redo.jpg",
+    workTitle: "Redo",
+    workMeta: "UI/UX/Branding",
+    workYear: "2023",
+    heroImage: "/work-redo.jpg",
+    hoverImages: [
+      previewSwatch("#141414", "#3f3f46", "#f4f4f1"),
+      previewSwatch("#101820", "#6c63ff", "#ffffff"),
+      previewSwatch("#1b1b1b", "#f05f57", "#fff7e8")
+    ],
+    description:
+      "A focused identity study built around compact typography, bold framing, and adaptable campaign assets.",
+    intro:
+      "Archive 05 expands the work archive with a focused identity study, balancing compact typography, bold framing, and adaptable campaign assets for a flexible visual system.",
+    gallery: [
+      {
+        alt: "Redo identity overview",
+        layout: "landscape",
+        src: "/work-redo.jpg"
+      },
+      {
+        alt: "Redo work presentation",
+        layout: "wide",
+        src: "/work-redo.jpg"
+      }
+    ],
+    href: "/work/archive-05"
+  },
+  {
+    slug: "archive-06",
+    title: "Bloom",
+    year: "2024",
+    role: "UI / Experience",
+    type: "Digital Product",
+    category: ["Game design"],
+    image: "/work-bloom.jpg",
+    workImage: "/work-bloom.jpg",
+    workTitle: "Bloom",
+    workMeta: "Game design /UI design",
+    workYear: "2024",
+    heroImage: "/work-bloom.jpg",
+    hoverImages: [
+      previewSwatch("#0a0a0a", "#4698ff", "#f4f4f1"),
+      previewSwatch("#111111", "#2ec4b6", "#ffffff"),
+      previewSwatch("#1f2937", "#ffb000", "#f7f4ef")
+    ],
+    description:
+      "A digital interface direction shaped around clear product storytelling, structured content, and precise visual pacing.",
+    intro:
+      "Archive 06 frames a digital interface direction around clear product storytelling, structured content, and precise visual pacing across responsive screens.",
+    gallery: [
+      {
+        alt: "Bloom digital interface overview",
+        layout: "landscape",
+        src: "/work-bloom.jpg"
+      },
+      {
+        alt: "Bloom product presentation",
+        layout: "wide",
+        src: "/work-bloom.jpg"
+      }
+    ],
+    href: "/work/archive-06"
+  },
+  {
+    slug: "archive-07",
+    title: "Eventin",
+    year: "2026",
+    role: "Campaign / Visual System",
+    type: "Art Direction",
+    category: ["Digital design"],
+    image: "/work-eventin.png",
+    workImage: "/work-eventin.png",
+    workTitle: "Eventin",
+    workMeta: "UI/UX design",
+    workYear: "2026",
+    heroImage: "/work-eventin.png",
+    hoverImages: [
+      previewSwatch("#171717", "#d7263d", "#f5f1e8"),
+      previewSwatch("#111111", "#9b5de5", "#fefefe"),
+      previewSwatch("#0f172a", "#ff9f1c", "#ffffff")
+    ],
+    description:
+      "A campaign direction using high-contrast imagery, direct messaging, and modular graphic frames.",
+    intro:
+      "Archive 07 builds a campaign direction with high-contrast imagery, direct messaging, and modular graphic frames that can stretch from print to digital touchpoints.",
+    gallery: [
+      {
+        alt: "Eventin campaign visual",
+        layout: "landscape",
+        src: "/work-eventin.png"
+      },
+      {
+        alt: "Eventin campaign presentation",
+        layout: "wide",
+        src: "/work-eventin.png"
+      }
+    ],
+    href: "/work/archive-07"
+  },
+  {
+    slug: "archive-08",
+    title: "Portfolio",
+    year: "2025",
+    role: "Brand / Editorial",
+    type: "Brand System",
+    category: ["Vibe coding"],
+    image: "/work-portfolio.png",
+    workImage: "/work-portfolio.png",
+    workTitle: "Portfolio",
+    workMeta: "Vibe coding",
+    workYear: "2025",
+    heroImage: "/work-portfolio.png",
+    hoverImages: [
+      previewSwatch("#111111", "#4d908e", "#f2f2f2"),
+      previewSwatch("#151515", "#f94144", "#ffffff"),
+      previewSwatch("#0b0b0b", "#90be6d", "#f4f4f1")
+    ],
+    description:
+      "An editorial brand system with restrained layouts, tactile detail, and a quiet visual rhythm.",
+    intro:
+      "Archive 08 develops an editorial brand system with restrained layouts, tactile detail, and a quiet visual rhythm across applications.",
+    gallery: [
+      {
+        alt: "Portfolio editorial brand system",
+        layout: "landscape",
+        src: "/work-portfolio.png"
+      },
+      {
+        alt: "Portfolio brand presentation",
+        layout: "wide",
+        src: "/work-portfolio.png"
+      }
+    ],
+    href: "/work/archive-08"
+  },
+  {
+    slug: "archive-09",
+    title: "Upwrd",
+    year: "2026",
+    role: "Interaction / Prototype",
+    type: "Vibe Coding",
+    category: ["Digital design"],
+    image: "/project-02.png",
+    workImage: "/work-upwrd.png",
+    workTitle: "Upwrd",
+    workMeta: "UX/UI/Branding",
+    workYear: "2026",
+    workOrder: 0,
+    heroImage: "/work-project-02.png",
+    hoverImages: [
+      previewSwatch("#050505", "#62c6ff", "#ffffff"),
+      previewSwatch("#111111", "#19a974", "#f7c948"),
+      previewSwatch("#101820", "#ff3366", "#fefefe")
+    ],
+    description:
+      "An interactive prototype exploring lightweight motion, product atmosphere, and rapid front-end iteration.",
+    intro:
+      "Archive 09 explores an interactive prototype through lightweight motion, product atmosphere, and rapid front-end iteration.",
+    gallery: [
+      {
+        alt: "Archive 09 interactive prototype",
+        layout: "landscape",
+        src: "/project-02.png"
+      },
+      {
+        alt: "Archive 09 digital presentation",
+        layout: "wide",
+        src: "/work-project-02.png"
+      }
+    ],
+    href: "/work/archive-09"
+  },
+  {
+    slug: "archive-10",
+    title: "Scam",
+    year: "2022",
+    role: "Game / Visual Direction",
+    type: "Game Design",
+    category: ["Brand identity", "Game design"],
+    image: "/project-03.png",
+    workImage: "/work-scam-identity.jpg",
+    workTitle: "Scam",
+    workMeta: "Game design/graphic design",
+    workYear: "2022",
+    heroImage: "/work-project-03.png",
+    hoverImages: [
+      previewSwatch("#0a0a0a", "#577590", "#ffffff"),
+      previewSwatch("#111111", "#f9c74f", "#151515"),
+      previewSwatch("#1b1b1b", "#00bbf9", "#fefefe")
+    ],
+    description:
+      "A visual direction study for game-like experiences, using bold contrast, compact systems, and atmospheric assets.",
+    intro:
+      "Scam studies visual direction for game-like experiences, using bold contrast, compact systems, and atmospheric assets to support interaction.",
+    gallery: [
+      {
+        alt: "Scam game visual direction",
+        layout: "landscape",
+        src: "/project-03.png"
+      },
+      {
+        alt: "Scam visual system presentation",
+        layout: "wide",
+        src: "/work-project-03.png"
+      }
+    ],
+    href: "/work/archive-10"
   }
 ];
 
@@ -219,8 +464,8 @@ export function getPreviousProject(slug: string) {
 
 export const projectCategories = [
   "ALL",
-  "Brand Identity",
   "Digital Design",
+  "Brand Identity",
   "Game Design",
   "Vibe coding",
   "OTHER"

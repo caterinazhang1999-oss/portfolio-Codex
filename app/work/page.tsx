@@ -73,6 +73,18 @@ export default function WorkPage() {
     x: 0,
     y: 0
   });
+  const workProjects = useMemo(
+    () =>
+      projects
+        .map((project, index) => ({ index, project }))
+        .sort(
+          (a, b) =>
+            (a.project.workOrder ?? a.index + 1) -
+            (b.project.workOrder ?? b.index + 1)
+        )
+        .map(({ project }) => project),
+    []
+  );
 
   useEffect(() => {
     const syncCategoryFromUrl = () => {
@@ -90,15 +102,15 @@ export default function WorkPage() {
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === "ALL") {
-      return projects;
+      return workProjects;
     }
 
     const dataCategory = categoryFilterValues[activeCategory];
 
-    return projects.filter((project) =>
+    return workProjects.filter((project) =>
       project.category.includes(dataCategory)
     );
-  }, [activeCategory]);
+  }, [activeCategory, workProjects]);
 
   const showProjectCursor = (project: Project) => {
     setCursorLabel((current) => ({
@@ -143,13 +155,18 @@ export default function WorkPage() {
             </motion.h1>
             <motion.div {...reveal} className="work-hero-copy">
               <p className="work-hero-lede">
-                Selected work shaped through identity, interface, and visual
-                systems.
+                Designing visual solutions for diverse needs.
               </p>
               <p className="work-hero-meta">
                 A focused archive across brand identity, digital design, game
                 design, and vibe coding.
               </p>
+              <a
+                className="tight-link work-portfolio-link"
+                href="https://www.behance.net/gallery/251975943/portfolio-2026-UIUX"
+              >
+                PORTFOLIO 2026 <span aria-hidden="true">📁</span>
+              </a>
             </motion.div>
           </section>
 

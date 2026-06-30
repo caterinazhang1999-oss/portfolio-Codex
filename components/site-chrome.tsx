@@ -129,7 +129,7 @@ export function Header() {
       </nav>
       <a
         className="tight-link col-span-1 col-start-4 mt-[22px] justify-self-end md:col-start-12 md:mt-[25px]"
-        href="#contact"
+        href="mailto:caterinazhang1999@gmail.com"
       >
         Contacts
       </a>
@@ -146,7 +146,7 @@ export function Footer() {
       <motion.div {...reveal} className="col-span-4 md:col-span-4">
         <a
           className="inline-block text-[clamp(58px,6.7vw,118px)] font-semibold leading-[1.05] tracking-[-0.07em] text-ash underline decoration-[0.045em] underline-offset-[0.13em] transition-opacity hover:opacity-70"
-          href="mailto:hello@atena.studio"
+          href="mailto:caterinazhang1999@gmail.com"
         >
           Let&apos;s talk
         </a>
@@ -199,11 +199,11 @@ export function Footer() {
           </a>
           <a
             className="transition-opacity hover:opacity-70"
-            href="https://instagram.com"
+            href="https://www.zcool.com.cn"
             rel="noreferrer"
             target="_blank"
           >
-            Ins
+            ZCOOL
           </a>
         </div>
       </motion.div>

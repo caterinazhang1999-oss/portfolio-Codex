@@ -127,7 +127,7 @@ function Hero() {
         className="col-span-1 col-start-3 row-start-2 mt-8 md:col-start-11 md:row-start-1 md:mt-0"
       >
         <span className="block text-[28px] font-semibold leading-none tracking-[-0.05em] text-ash md:text-[36px]">
-          24+
+          5+
         </span>
         <span className="micro-label mt-3 block">Selected Projects</span>
       </motion.div>
@@ -136,9 +136,9 @@ function Hero() {
         className="col-span-1 col-start-4 row-start-2 mt-8 md:col-start-12 md:row-start-1 md:mt-0"
       >
         <span className="block text-[28px] font-semibold leading-none tracking-[-0.05em] text-ash md:text-[36px]">
-          07
+          08
         </span>
-        <span className="micro-label mt-3 block">Years Practice</span>
+        <span className="micro-label mt-3 block">Years study</span>
       </motion.div>
     </section>
   );
@@ -165,13 +165,16 @@ function FeaturedVisual() {
 }
 
 function SectionTitle({
+  action,
   title
 }: {
+  action?: React.ReactNode;
   title: string;
 }) {
   return (
-    <motion.div {...reveal} className="layout-grid">
+    <motion.div {...reveal} className="layout-grid items-end">
       <h2 className={sectionTitleClass}>{title}</h2>
+      {action}
     </motion.div>
   );
 }
@@ -333,6 +336,11 @@ function ProjectCard({
   project: Project;
   size?: "small" | "large";
 }) {
+  const displayTitle = project.featuredTitle ?? project.title;
+  const displayMeta = project.featuredMeta ?? `${project.year} / ${project.type}`;
+  const displayDescription = project.featuredDescription ?? project.description;
+  const displayRole = project.featuredRole ?? project.role;
+
   return (
     <motion.article
       {...reveal}
@@ -344,16 +352,16 @@ function ProjectCard({
       <ProjectPreviewImage project={project} size={size} />
       <div className="mt-5">
         <h3 className="text-[clamp(23px,2.1vw,34px)] font-semibold leading-[0.98] tracking-[-0.06em] text-ash">
-          {project.title}
+          {displayTitle}
         </h3>
         <p className="mt-3 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
-          {project.year} / {project.type}
+          {displayMeta}
         </p>
         <p className="mt-6 max-w-[34rem] text-[15px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/70 md:text-[16px]">
-          {project.description}
+          {displayDescription}
         </p>
         <p className="mt-4 text-[clamp(17px,1.25vw,22px)] font-semibold leading-[1.15] tracking-[-0.045em] text-ash/80">
-          {project.role}
+          {displayRole}
         </p>
       </div>
     </motion.article>
@@ -428,7 +436,7 @@ function ProjectsEditorial() {
   const showProjectCursor = (project: Project) => {
     setCursorLabel((current) => ({
       ...current,
-      text: `${project.title} · VIEW PROJECT`,
+      text: `${project.featuredTitle ?? project.title} · VIEW PROJECT`,
       visible: true
     }));
   };
@@ -475,16 +483,6 @@ function ProjectsEditorial() {
           </button>
         </div>
 
-        <div className="projects-intro">
-          <h3>
-            Selected work shaped through identity, interface, and visual
-            systems.
-          </h3>
-          <p>
-            Project groups move as complete editorial spreads, preserving the
-            contrast between focused studies and larger visual anchors.
-          </p>
-        </div>
       </motion.div>
 
       <div className="projects-carousel" aria-label="Selected projects carousel">
@@ -526,15 +524,32 @@ function Projects() {
   return (
     <section className="scroll-effect-layer pt-24 md:pt-36">
       <div className="about-light-section">
-        <SectionTitle title="About" />
+        <SectionTitle
+          action={
+            <a
+              className="tight-link col-span-2 col-start-3 justify-self-end md:col-span-2 md:col-start-11"
+              download
+              href="/download-info.pdf"
+            >
+              Download info
+            </a>
+          }
+          title="About"
+        />
         <PersonalIntro />
       </div>
       <motion.div
         id="projects"
         {...reveal}
-        className="layout-grid mt-24 md:mt-36"
+        className="layout-grid mt-24 items-start md:mt-36"
       >
         <h2 className={sectionTitleClass}>Selected projects</h2>
+        <p className="col-span-4 mt-4 max-w-[34rem] justify-self-end text-right text-[13px] font-semibold leading-[1.45] tracking-[-0.02em] text-ash/62 md:col-span-4 md:col-start-9 md:mt-0 md:text-[15px]">
+          All projects displayed on this page are created solely for personal
+          learning and design practice, with no commercial purpose. If any
+          copyright issue arises, the related content can be removed
+          immediately.
+        </p>
       </motion.div>
       <ProjectsEditorial />
     </section>
@@ -569,8 +584,13 @@ function Capabilities() {
             }`}
             key={capability}
           >
-            <span className="micro-label col-span-1">0{index + 1}</span>
-            <h3 className="col-span-3 text-[clamp(34px,6vw,102px)] font-semibold leading-[0.9] tracking-[-0.06em] text-ash transition-transform duration-500 group-hover:translate-x-3 md:col-span-8 md:col-start-3">
+            <span className="micro-label col-span-1" key="capability-index">
+              0{index + 1}
+            </span>
+            <h3
+              className="col-span-3 text-[clamp(34px,6vw,102px)] font-semibold leading-[0.9] tracking-[-0.06em] text-ash transition-transform duration-500 group-hover:translate-x-3 md:col-span-8 md:col-start-3"
+              key="capability-title"
+            >
               <SplitHover>{capability}</SplitHover>
             </h3>
           </Link>
