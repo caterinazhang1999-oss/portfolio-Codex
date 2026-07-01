@@ -328,6 +328,42 @@ export const projects: Project[] = [
     href: "/work/archive-07"
   },
   {
+    slug: "benedizione-doriente",
+    title: "BENEDIZIONE D‘ORIENTE",
+    year: "2026",
+    role: "Brand identity / Packing / Illustation",
+    type: "Brand Identity",
+    category: ["Brand identity"],
+    image: "/work-benedizione.jpg",
+    workImage: "/work-benedizione.jpg",
+    workTitle: "BENEDIZIONE D‘ORIENTE",
+    workMeta: "Brand identity,Packing ,Illustation",
+    workYear: "2026",
+    heroImage: "/work-benedizione.jpg",
+    hoverImages: [
+      previewSwatch("#3d0605", "#9d1f17", "#f5e7d2"),
+      previewSwatch("#1f0504", "#6f0f0b", "#ffffff"),
+      previewSwatch("#5f0a08", "#2a0605", "#d9a66b")
+    ],
+    description:
+      "A brand identity and packaging illustration project shaped around Eastern visual motifs, deep red atmosphere, and refined editorial pacing.",
+    intro:
+      "BENEDIZIONE D‘ORIENTE frames a Chinese Baijiu blind box identity through rich red tones, illustrated cultural references, and packaging-led storytelling.",
+    gallery: [
+      {
+        alt: "BENEDIZIONE D‘ORIENTE brand identity cover",
+        layout: "wide",
+        src: "/work-benedizione.jpg"
+      },
+      {
+        alt: "BENEDIZIONE D‘ORIENTE packaging identity presentation",
+        layout: "landscape",
+        src: "/work-benedizione.jpg"
+      }
+    ],
+    href: "/work/benedizione-doriente"
+  },
+  {
     slug: "archive-08",
     title: "Portfolio",
     year: "2025",
